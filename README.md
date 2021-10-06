@@ -7,7 +7,7 @@ Classes are implemented and I'm currently working on implementing functions.
 
 Here is what is implemented:
 
-Accounting functions are about 65% done.
+Accounting functions are about 98% done (Pending updates from the Integrations team, look for 'TODO' comments).
 Rest is not done yet.
 
 Documentation available here: https://developer.servicetitan.io/
