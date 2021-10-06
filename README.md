@@ -11,3 +11,4 @@ Accounting functions are about 65% done.
 Rest is not done yet.
 
 Documentation available here: https://developer.servicetitan.io/
+ServiceTitan is a cloud platform helping the service industry manage their businesses. Find more at https://www.servicetitan.com
