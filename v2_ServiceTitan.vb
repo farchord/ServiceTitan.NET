@@ -3170,7 +3170,7 @@ Public Class ServiceTitan
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
                         Dim results As List(Of InvoiceResponse) = JsonConvert.DeserializeObject(Of List(Of InvoiceResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
-                        Console.WriteLine("Output: " & output)
+
                         streamread.Close()
                         buffer.Close()
                         response.Close()
@@ -3684,7 +3684,7 @@ Public Class ServiceTitan
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
                         Dim results As List(Of DetailedPaymentResponse) = JsonConvert.DeserializeObject(Of List(Of DetailedPaymentResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
-                        Console.WriteLine("Output: " & output)
+
                         streamread.Close()
                         buffer.Close()
                         response.Close()
@@ -3756,7 +3756,7 @@ Public Class ServiceTitan
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
                         Dim results As List(Of PaymentTermModel) = JsonConvert.DeserializeObject(Of List(Of PaymentTermModel))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
-                        Console.WriteLine("Output: " & output)
+
                         streamread.Close()
                         buffer.Close()
                         response.Close()
@@ -3828,7 +3828,7 @@ Public Class ServiceTitan
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
                         Dim results As List(Of PaymentTypeResponse_P) = JsonConvert.DeserializeObject(Of List(Of PaymentTypeResponse_P))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
-                        Console.WriteLine("Output: " & output)
+
                         streamread.Close()
                         buffer.Close()
                         response.Close()
@@ -3900,7 +3900,7 @@ Public Class ServiceTitan
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
                         Dim results As List(Of PaymentTypeResponse) = JsonConvert.DeserializeObject(Of List(Of PaymentTypeResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
-                        Console.WriteLine("Output: " & output)
+
                         streamread.Close()
                         buffer.Close()
                         response.Close()
@@ -3972,7 +3972,7 @@ Public Class ServiceTitan
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
                         Dim results As List(Of TaxZoneResponse_P) = JsonConvert.DeserializeObject(Of List(Of TaxZoneResponse_P))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
-                        Console.WriteLine("Output: " & output)
+
                         streamread.Close()
                         buffer.Close()
                         response.Close()
@@ -3983,7 +3983,225 @@ Public Class ServiceTitan
                     End Try
                 End Function
             End Class
+            Public Class CRM
+                Inherits Types.CRM
+                ''' <summary>
+                ''' Gets a specific lead by it's internal ID.
+                ''' </summary>
+                ''' <param name="leadid">The lead ID number</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a single lead (LeadResponse) or a ServiceTitanError.</returns>
+                Public Shared Function getLead(ByVal leadid As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
 
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/crm/v2/tenant/" & tenant & "/leads"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/x-www-form-urlencoded"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As LeadResponse = JsonConvert.DeserializeObject(Of LeadResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a paginated list of leads. Does not get other pages, use pagination to cycle through them.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of filters or preferences for this function</param>
+                ''' <returns>Returns either a paginated list of Leads (LeadResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getLeadList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/crm/v2/tenant/" & tenant & "/leads"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/x-www-form-urlencoded"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of LeadResponse_P) = JsonConvert.DeserializeObject(Of List(Of LeadResponse_P))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a paginated list of tags. Does not get other pages, use pagination to cycle through them.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of filters or preferences for this function</param>
+                ''' <returns>Returns either a paginated list of tags (TagsResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getTagList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/crm/v2/tenant/" & tenant & "/tags"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/x-www-form-urlencoded"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of TagsResponse_P) = JsonConvert.DeserializeObject(Of List(Of TagsResponse_P))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
         End Class
     End Class
     Public Class Internal
