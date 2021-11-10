@@ -708,6 +708,9 @@ Public Class ServiceTitan
 
         End Class
         Public Class Inventory
+            Public Class CreatePurchaseOrderResponse
+                Public id As Integer
+            End Class
 
             Public Class CreatePurchaseOrderRequest
                 Public Property vendorId As Integer
@@ -1215,6 +1218,11 @@ Public Class ServiceTitan
         End Class
         Public Class Marketing
 
+            Public Class CampaignCategoryCreateUpdateModel
+                Public Property name As String
+                Public Property active As Boolean
+            End Class
+
             Public Class CreateCostRequest
                 Public Property campaignId As Integer
                 Public Property year As Integer
@@ -1694,6 +1702,9 @@ Public Class ServiceTitan
 
         End Class
         Public Class Payroll
+            Public Class ModificationResponse
+                Public id As Integer
+            End Class
 
             Public Class PayrollActivityCodeResponse_P
                 Public Property page As Integer
@@ -3068,7 +3079,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3122,7 +3133,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3194,7 +3205,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3249,7 +3260,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3303,7 +3314,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3357,7 +3368,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3410,7 +3421,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3467,7 +3478,7 @@ Public Class ServiceTitan
                         Dim deserialized As PaymentResponse = JsonConvert.DeserializeObject(Of PaymentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
                         Return deserialized
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3520,7 +3531,7 @@ Public Class ServiceTitan
                         buffer.Close()
                         response.Close()
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3577,7 +3588,7 @@ Public Class ServiceTitan
                         'Dim deserialized As PaymentResponse = JsonConvert.DeserializeObject(Of PaymentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
                         'Return deserialized
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3635,7 +3646,7 @@ Public Class ServiceTitan
                         Dim deserialized As PaymentResponse = JsonConvert.DeserializeObject(Of PaymentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
                         Return deserialized
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3708,7 +3719,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3780,7 +3791,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3852,7 +3863,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3924,7 +3935,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -3996,7 +4007,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4071,7 +4082,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4143,7 +4154,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4215,7 +4226,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4290,7 +4301,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4362,7 +4373,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4434,7 +4445,7 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
@@ -4506,7 +4517,5852 @@ Public Class ServiceTitan
                         response.Close()
                         Return results
                     Catch ex As WebException
-                        Dim newerror As ApiErrorResponse = ErrorHandling.ProcessError(ex)
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class EquipmentSystems
+                Inherits Types.EquipmentSystems
+                ''' <summary>
+                ''' Creates a new Installed Equipment on a location ID.
+                ''' </summary>
+                ''' <param name="equipment">Information to add the new equipment to the file.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns an instance of the new installed equipment (InstalledEquipmentDetailedResponse), or a ServiceTitanError.</returns>
+                Public Shared Function createInstalledEquipment(ByVal equipment As InstalledEquipmentCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/equipmentsystems/v2/tenant/" & tenant & "/installed-equipment"
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(equipment))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+
+                        Dim deserialized As InstalledEquipmentDetailedResponse = JsonConvert.DeserializeObject(Of InstalledEquipmentDetailedResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Return deserialized
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a single installed equipment by it's ID.
+                ''' </summary>
+                ''' <param name="id">The installed equipment ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either an installed equipment (InstalledEquipmentDetailedResponse) or a ServiceTitanError.</returns>
+                Public Shared Function getInstalledEquipment(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/equipmentsystems/v2/tenant/" & tenant & "/installed-equipment/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As InstalledEquipmentDetailedResponse = JsonConvert.DeserializeObject(Of InstalledEquipmentDetailedResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a paginated list of Installed Equipments.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of filters to limit the list of returned records</param>
+                ''' <returns>Returns either a paginated list of installed equipments (InstalledEquipmentResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getInstalledEquipments(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList)) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/equipmentsystems/v2/tenant/" & tenant & "/installed-equipment"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As InstalledEquipmentResponse_P = JsonConvert.DeserializeObject(Of InstalledEquipmentResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates an existing installed equipment record, by it's ID.
+                ''' </summary>
+                ''' <param name="id">The installed equipment ID</param>
+                ''' <param name="equipment">The information to update on the equipment.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, the request returns the updated equipment (InstalledEquipmentDetailedResponse) or a ServiceTitanError.</returns>
+                Public Shared Function UpdateInstalledEquipment(ByVal id As Integer, ByVal equipment As InstalledEquipmentUpdateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer)
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/equipmentsystems/v2/tenant/" & tenant & "/installed-equipment/" & id
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(equipment))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Dim results As InstalledEquipmentDetailedResponse = JsonConvert.DeserializeObject(Of InstalledEquipmentDetailedResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class Inventory
+                Inherits Types.Inventory
+                ''' <summary>
+                ''' Creates a new purchase order, using a CreatePurchaseOrderRequest payload.
+                ''' </summary>
+                ''' <param name="purchaseorder">The new purchase order to create</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, the request returns the created equipment's ID as a CreatePurchaseOrderResponse class, or a ServiceTitanError.</returns>
+                Public Shared Function createPurchaseOrder(ByVal purchaseorder As CreatePurchaseOrderRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/inventory/v2/tenant/" & tenant & "/purchase-orders"
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(purchaseorder))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+
+                        Dim deserialized As CreatePurchaseOrderResponse = JsonConvert.DeserializeObject(Of CreatePurchaseOrderResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Return deserialized
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Queries for a list of purchase orders, using a list of OptionsList as filters.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of filters, as well as options to cycle through pages.</param>
+                ''' <returns>A paginated list of purchase orders (as PurchaseOrderResponse_P), or a ServiceTitanError.</returns>
+                Public Shared Function getPurchaseOrders(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList)) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/inventory/v2/tenant/" & tenant & "/purchase-orders"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PurchaseOrderResponse_P = JsonConvert.DeserializeObject(Of PurchaseOrderResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single Purchase Order by it's ID.
+                ''' </summary>
+                ''' <param name="id">Purchase Order ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns a PurchaseOrderResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getPurchaseOrder(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/inventory/v2/tenant/" & tenant & "/purchase-orders"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PurchaseOrderResponse = JsonConvert.DeserializeObject(Of PurchaseOrderResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates an existing purchase order
+                ''' </summary>
+                ''' <param name="poId">The Purchase Order ID to update.</param>
+                ''' <param name="purchaseorder">The updated purchase order</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns an instance of CreatePurchaseOrderResponse, or a ServiceTitanError</returns>
+                Public Shared Function UpdatePurchaseOrder(ByVal poId As Integer, ByVal purchaseorder As UpdatePurchaseOrderRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer)
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/inventory/v2/tenant/" & tenant & "/purchase-orders/" & poId
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(purchaseorder))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CreatePurchaseOrderResponse = JsonConvert.DeserializeObject(Of CreatePurchaseOrderResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class JobBooking_ContactExperience
+                Inherits Types.JobBooking_ContactExperience
+                ''' <summary>
+                ''' Gets a list of call reasons, depending on the provided OptionsList.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A filter list for this request</param>
+                ''' <returns>Returns either a paginated list of CallReasonResponse (CallReasonResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getCallReasons(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jbce/v2/tenant/" & tenant & "/call-reasons"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CallReasonResponse_P = JsonConvert.DeserializeObject(Of CallReasonResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class JobPlanning_Management
+                Inherits Types.JobPlanning_Management
+                ''' <summary>
+                ''' Creates a new appointment onto an existing job.
+                ''' </summary>
+                ''' <param name="appointment">The new appointment to create</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either the created appointment (AppointmentResponse) or a ServiceTitanError.</returns>
+                Public Shared Function createAppointment(ByVal appointment As AppointmentAddRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments"
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(appointment))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+
+                        Dim deserialized As AppointmentResponse = JsonConvert.DeserializeObject(Of AppointmentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Return deserialized
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates the special instructions on an existing appointment.
+                ''' </summary>
+                ''' <param name="id">The appointment ID</param>
+                ''' <param name="instructions">The special instructions</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either the updated appointment (AppointmentResponse) or a ServiceTitanError.</returns>
+                Public Shared Function updateAppointmentSpecialInstructions(ByVal id As Integer, ByVal instructions As UpdateAppointmentSpecialInstructionsRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments/" & id & "/special-instructions"
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PUT"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(instructions))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+
+                        Dim deserialized As AppointmentResponse = JsonConvert.DeserializeObject(Of AppointmentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Return deserialized
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Deletes an appointment.
+                ''' </summary>
+                ''' <param name="id">The appointment's ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, this function returns Nothing, or a ServiceTitanError.</returns>
+                Public Shared Function deleteAppointment(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxAuthEnvironment
+                        Else
+                            domain = "https://" & productionAuthEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments/" & id
+
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "DEL"
+                        req.Timeout = 999999
+
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(instructions))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+
+                        'Dim deserialized As AppointmentResponse = JsonConvert.DeserializeObject(Of AppointmentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a paginated list of appointments, based on the specified OptionsList.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">The options list for this parameter (Filters)</param>
+                ''' <returns>Returns either a paginated list of AppointmentResponse (AppointmentResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getAppointments(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As AppointmentResponse_P = JsonConvert.DeserializeObject(Of AppointmentResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single appointment, by it's ID
+                ''' </summary>
+                ''' <param name="id">The appointment's ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a AppointmentResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getAppointment(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As AppointmentResponse = JsonConvert.DeserializeObject(Of AppointmentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Puts an appointment on hold.
+                ''' </summary>
+                ''' <param name="id">The appointment ID</param>
+                ''' <param name="reason">The reason for putting the appointment on hold</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, the function returns Nothing. If not, it returns a ServiceTitanError.</returns>
+                Public Shared Function putAppointmentOnHold(ByVal id As Integer, ByVal reason As HoldAppointmentRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments/" & id & "/hold"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PUT"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(reason))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As AppointmentResponse_P = JsonConvert.DeserializeObject(Of AppointmentResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Removes hold from the appointment.
+                ''' </summary>
+                ''' <param name="id">The appointment ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, the function returns Nothing. If not, it returns a ServiceTitanError.</returns>
+
+                Public Shared Function removeAppointmentFromHold(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments/" & id & "/hold"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "DEL"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(reason))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As AppointmentResponse_P = JsonConvert.DeserializeObject(Of AppointmentResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Reschedules a single appointment.
+                ''' </summary>
+                ''' <param name="id">The appointment's ID.</param>
+                ''' <param name="reschedulerequest">The reschedule request</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns Nothing. If the request fails, returns a ServiceTitanError.</returns>
+                Public Shared Function rescheduleAppointment(ByVal id As Integer, ByVal reschedulerequest As AppointmentRescheduleRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/appointments/" & id & "/reschedule"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(reschedulerequest))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As AppointmentResponse_P = JsonConvert.DeserializeObject(Of AppointmentResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of Job Cancel Reasons, in a paginated format.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this request</param>
+                ''' <returns>Returns either a paginated list of Job Cancel Reasons (JobCancelReasonResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getJobCancelReasons(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/job-cancel-reasons"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobCancelReasonResponse_P = JsonConvert.DeserializeObject(Of JobCancelReasonResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of Job on Hold Reasons, in a paginated format.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this request</param>
+                ''' <returns>Returns either a paginated list of Job On Hold Reasons (JobHoldReasonResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getJobHoldReasons(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/job-hold-reasons"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobHoldReasonResponse_P = JsonConvert.DeserializeObject(Of JobHoldReasonResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Cancels the specified job, for the specified reason.
+                ''' </summary>
+                ''' <param name="jobid">The Job ID to cancel</param>
+                ''' <param name="payload">The payload, containing the reason for cancellation.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, request returns Nothing. If error, returns a ServiceTitanError.</returns>
+                Public Shared Function cancelJob(ByVal jobid As Integer, ByVal payload As CancelJobRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid & "/cancel"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PUT"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As JobHoldReasonResponse_P = JsonConvert.DeserializeObject(Of JobHoldReasonResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new job
+                ''' </summary>
+                ''' <param name="payload">The data to put in the new job</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a JobResponse, or a ServiceTitanError.</returns>
+                Public Shared Function createJob(ByVal payload As JobCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobResponse = JsonConvert.DeserializeObject(Of JobResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new note on a job.
+                ''' </summary>
+                ''' <param name="jobid">The job ID where the note should appear.</param>
+                ''' <param name="payload">The note payload</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a NoteResponse, or a ServiceTitanError.</returns>
+                Public Shared Function createJobNote(ByVal jobid As Integer, ByVal payload As JobNoteCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid & "/notes"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As NoteResponse = JsonConvert.DeserializeObject(Of NoteResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single job, by it's ID.
+                ''' </summary>
+                ''' <param name="jobid">The job ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of OptionList. Right now, the only option available for this API endpoint is externalDataApplicationGuid.</param>
+                ''' <returns>Either returns a JobResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getJob(ByVal jobid As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobResponse = JsonConvert.DeserializeObject(Of JobResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of Cancel Reasons for a job.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters.</param>
+                ''' <returns>Either returns a paginated list of Cancel reasons (CancelReasonResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getJobCancelReasons(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/cancel-reasons"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CancelReasonResponse_P = JsonConvert.DeserializeObject(Of CancelReasonResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a job's full history.
+                ''' </summary>
+                ''' <param name="jobid">The job ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a JobHistoryResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getJobHistory(ByVal jobid As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid & "/history"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobHistoryResponse = JsonConvert.DeserializeObject(Of JobHistoryResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of jobs (Based on your filters/options)
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this endpoint.</param>
+                ''' <returns>Either returns a paginated list of jobs (JobResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getJobList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobResponse_P = JsonConvert.DeserializeObject(Of JobResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a paginated list of a job's notes.
+                ''' </summary>
+                ''' <param name="jobid">The job's ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this endpoint.</param>
+                ''' <returns>Returns either a paginated list of notes (NoteResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getJobNotes(ByVal jobid As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid & "/notes"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As NoteResponse_P = JsonConvert.DeserializeObject(Of NoteResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Puts a job on hold. Requires a reason.
+                ''' </summary>
+                ''' <param name="jobid">Job ID</param>
+                ''' <param name="payload">The reason</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns Nothing (if successful) or a ServiceTitanError.</returns>
+                Public Shared Function putJobOnHold(ByVal jobid As Integer, ByVal payload As HoldJobRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid & "/hold"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PUT"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As NoteResponse_P = JsonConvert.DeserializeObject(Of NoteResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a job with new information.
+                ''' </summary>
+                ''' <param name="jobid">Job's ID</param>
+                ''' <param name="payload">The updated job information.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a JobResponse, or a ServiceTitanError.</returns>
+                Public Shared Function updateJob(ByVal jobid As Integer, ByVal payload As UpdateJobRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/jobs/" & jobid
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobResponse = JsonConvert.DeserializeObject(Of JobResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a single job type with new information.
+                ''' </summary>
+                ''' <param name="jobTypeID">The job type's ID.</param>
+                ''' <param name="payload">The job type payload</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a JobTypeResponse, or a ServiceTitanError.</returns>
+                Public Shared Function updateJobType(ByVal jobTypeID As Integer, ByVal payload As UpdateJobTypeRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/job-types/" & jobTypeID
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobTypeResponse = JsonConvert.DeserializeObject(Of JobTypeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new job type.
+                ''' </summary>
+                ''' <param name="payload">The job type to create</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a JobTypeResponse, or a ServiceTitanError.</returns>
+                Public Shared Function createJobType(ByVal payload As CreateJobTypeRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/job-types"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobTypeResponse = JsonConvert.DeserializeObject(Of JobTypeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single job type, by it's ID.
+                ''' </summary>
+                ''' <param name="jobTypeID">The job type's ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this endpoint.</param>
+                ''' <returns>Either returns a JobTypeResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getJobType(ByVal jobTypeID As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/job-types/" & jobTypeID
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobTypeResponse = JsonConvert.DeserializeObject(Of JobTypeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of job types, based on your options/filters.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this endpoint.</param>
+                ''' <returns>Either returns a paginated list of job types (JobTypeResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getJobTypeList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/job-types"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As JobTypeResponse_P = JsonConvert.DeserializeObject(Of JobTypeResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of projects, based on your options/filters.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/filters for this endpoint.</param>
+                ''' <returns>Either returns a paginated list of projects (ProjectResponse_P) or a ServiceTitanError.</returns>
+
+                Public Shared Function getProjectList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/projects"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ProjectResponse_P = JsonConvert.DeserializeObject(Of ProjectResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single project, by it's ID.
+                ''' </summary>
+                ''' <param name="projectID">The project's ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a ProjectResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getProject(ByVal projectID As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/jpm/v2/tenant/" & tenant & "/projects/" & projectID
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ProjectResponse = JsonConvert.DeserializeObject(Of ProjectResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class Marketing
+                Inherits Types.Marketing
+                ''' <summary>
+                ''' Creates a new campaign category
+                ''' </summary>
+                ''' <param name="payload">The category payload</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns nothing. Otherwise, returns a ServiceTitanError.</returns>
+                Public Shared Function createCampaignCategories(ByVal payload As CampaignCategoryCreateUpdateModel, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/categories"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As ProjectResponse = JsonConvert.DeserializeObject(Of ProjectResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of Campaign Categories (Not paginated).
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a list of Campaigns (List Of(CampaignCategoryModel)) or a ServiceTitanError.</returns>
+                Public Shared Function getCampaignCategoriesList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/categories"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of CampaignCategoryModel) = JsonConvert.DeserializeObject(Of List(Of CampaignCategoryModel))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single Campaign Category.
+                ''' </summary>
+                ''' <param name="id">The Campaign Category ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a CampaignCategoryModel, or a ServiceTitanError.</returns>
+                Public Shared Function getCampaignCategory(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/categories/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CampaignCategoryModel = JsonConvert.DeserializeObject(Of CampaignCategoryModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a single campaign category by it's ID.
+                ''' </summary>
+                ''' <param name="id">The campaign category id.</param>
+                ''' <param name="payload">The updated campaign category</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns Nothing. Otherwise, returns a ServiceTitanError.</returns>
+                Public Shared Function updateCampaignCategory(ByVal id As Integer, ByVal payload As CampaignCategoryCreateUpdateModel, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/categories/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As CampaignCategoryModel = JsonConvert.DeserializeObject(Of CampaignCategoryModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new campaign cost record.
+                ''' </summary>
+                ''' <param name="payload">The new campaign cost</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns a CampaignCostModel. Otherwise, returns a ServiceTitanError.</returns>
+                Public Shared Function createCampaignCost(ByVal payload As CreateCostRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/costs"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CampaignCostModel = JsonConvert.DeserializeObject(Of CampaignCostModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates an existing Campaign Cost.
+                ''' </summary>
+                ''' <param name="payload">The updated campaign cost.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns Nothing. Otherwise, returns a ServiceTitanError.</returns>
+                Public Shared Function updateCampaignCost(ByVal payload As UpdateCostRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/costs"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As CampaignCostModel = JsonConvert.DeserializeObject(Of CampaignCostModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return Nothing
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new marketing campaign.
+                ''' </summary>
+                ''' <param name="payload">The campaign to create</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a DetailedCampaignModel (if successful), or a ServiceTitanError.</returns>
+                Public Shared Function createCampaign(ByVal payload As CampaignCreateModel, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/campaigns"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As DetailedCampaignModel = JsonConvert.DeserializeObject(Of DetailedCampaignModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of marketing campaigns, based on your parameters.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters</param>
+                ''' <returns>Returns either a paginated list of campaigns (CampaignModel_P) or a ServiceTitanError.</returns>
+                Public Shared Function getCampaignList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/campaigns"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CampaignModel_P = JsonConvert.DeserializeObject(Of CampaignModel_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a campaign's costs.
+                ''' </summary>
+                ''' <param name="campaignId">The campaign ID to get the costs for.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters</param>
+                ''' <returns>Returns either a list of CampaignCostModel, or a ServiceTitanError.</returns>
+                Public Shared Function getCampaignCosts(ByVal campaignId As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/campaigns/" & campaignId & "/costs"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of CampaignCostModel) = JsonConvert.DeserializeObject(Of List(Of CampaignCostModel))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single campaign, by it's ID.
+                ''' </summary>
+                ''' <param name="campaignId">The campaign's ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a single campaign (as DetailedCampaignModel) or a ServiceTitanError.</returns>
+                Public Shared Function GetCampaign(ByVal campaignId As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/campaigns/" & campaignId
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As DetailedCampaignModel = JsonConvert.DeserializeObject(Of DetailedCampaignModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a campaign.
+                ''' </summary>
+                ''' <param name="campaignId">The campaign ID</param>
+                ''' <param name="payload">The campaign update class</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a DetailedCampaignModel, or a ServiceTitanError.</returns>
+                Public Shared Function updateCampaign(ByVal campaignId As Integer, ByVal payload As CampaignCreateModel, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/marketing/v2/tenant/" & tenant & "/campaigns/" & campaignId
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PUT"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As DetailedCampaignModel = JsonConvert.DeserializeObject(Of DetailedCampaignModel)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class Memberships
+                Inherits Types.Memberships
+                ''' <summary>
+                ''' Creates a membership sale invoice, thus also creating the membership. This endpoint is the equivalent of clicking the 'Sell Membership' button in the location page in the GUI.
+                ''' </summary>
+                ''' <param name="payload">The new membership sale</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a MembershipSaleInvoiceCreateResponse, or a ServiceTitanError.</returns>
+                Public Shared Function sellMembership(ByVal payload As MembershipSaleInvoiceCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/memberships/sale"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As MembershipSaleInvoiceCreateResponse = JsonConvert.DeserializeObject(Of MembershipSaleInvoiceCreateResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of customer memberships, using options as a filter.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">List of options/filters</param>
+                ''' <returns>Either returns a paginated list of memberships (CustomerMembershipResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getMembershipList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/memberships"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CustomerMembershipResponse_P = JsonConvert.DeserializeObject(Of CustomerMembershipResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a membership record by it's ID.
+                ''' </summary>
+                ''' <param name="id">The membership ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns a single membership (CustomerMembershipResponse) or a ServiceTitanError.</returns>
+                Public Shared Function getMembership(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/memberships/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As CustomerMembershipResponse = JsonConvert.DeserializeObject(Of CustomerMembershipResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a membership with new information.
+                ''' </summary>
+                ''' <param name="id">The membership's ID.</param>
+                ''' <param name="payload">The new membership information</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a ModificationResponse (If successful), or a ServiceTitanError.</returns>
+                Public Shared Function updateMembership(ByVal id As Integer, ByVal payload As CustomerMembershipUpdateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/memberships/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new invoice template.
+                ''' </summary>
+                ''' <param name="payload">The new invoice template</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns a ModificationResponse (if successful) or a ServiceTitanError.</returns>
+                Public Shared Function createInvoiceTemplate(ByVal payload As InvoiceTemplateCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets invoice templates using a list of IDs (Max: 50).
+                ''' </summary>
+                ''' <param name="ids">A list of invoice template IDs. (TODO: Find if they need to be comma-delimited, assuming yes)</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a paginated list of Invoice templates (InvoiceTemplateResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getInvoiceTemplatesByIds(ByVal ids As String, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates?ids=" & System.Net.WebUtility.UrlEncode(ids)
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As InvoiceTemplateResponse_P = JsonConvert.DeserializeObject(Of InvoiceTemplateResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single invoice template by it's ID.
+                ''' </summary>
+                ''' <param name="id">The Invoice Template ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns an InvoiceTemplateResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getInvoiceTemplate(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As InvoiceTemplateResponse = JsonConvert.DeserializeObject(Of InvoiceTemplateResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a single invoice template.
+                ''' </summary>
+                ''' <param name="id">The Invoice Template ID</param>
+                ''' <param name="payload">The Invoice Template Payload</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a ModificationResponse, or a ServiceTitanError.</returns>
+                Public Shared Function updateInvoiceTemplate(ByVal id As Integer, ByVal payload As InvoiceTemplateUpdateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a list of Recurring Service Events based on your parameters.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of filters/parameters</param>
+                ''' <returns>Either returns a paginated list of Recurring Service Events (LocationRecurringServiceEventResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getRecurringServiceEvents(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As LocationRecurringServiceEventResponse_P = JsonConvert.DeserializeObject(Of LocationRecurringServiceEventResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Marking an event as complete links the job with provided JobID to the given Location Recurring Service Event. It will also copy over invoice items to the Job Invoice corresponding to the Invoice Template of the Location Recurring Service the Event was generated from.
+                ''' </summary>
+                ''' <param name="id">The recurring service event id.</param>
+                ''' <param name="payload">The payload (Containing the job id)</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns a ModificationResponse. Otherwise, returns a ServiceTitanError.</returns>
+                Public Shared Function markRecurringServiceEventComplete(ByVal id As Integer, ByVal payload As MarkEventCompletedStatusUpdateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates/" & id & "/mark-complete"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Marking an event as incomplete unlinks the job with provided JobID to the given Location Recurring Service Event. It will also delete the invoice items that were copied over when the Location Recurring Service Event was marked as completed on the Job.
+                ''' </summary>
+                ''' <param name="id">The recurring service event id.</param>
+                ''' <param name="payload">The payload (Containing the job id)</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns a ModificationResponse. Otherwise, returns a ServiceTitanError.</returns>
+                Public Shared Function markRecurringServiceEventIncomplete(ByVal id As Integer, ByVal payload As MarkEventCompletedStatusUpdateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/invoice-templates/" & id & "/mark-incomplete"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of recurring services.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">List of properties/filters</param>
+                ''' <returns>Either returns a paginated list of LocationRecurringServiceResponse (LocationRecurringServiceResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getRecurringServicesList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/recurring-services"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As LocationRecurringServiceResponse_P = JsonConvert.DeserializeObject(Of LocationRecurringServiceResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Returns a single recurring service (By ID).
+                ''' </summary>
+                ''' <param name="id">The recurring service ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns a LocationRecurringServiceResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getRecurringService(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/recurring-services/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As LocationRecurringServiceResponse = JsonConvert.DeserializeObject(Of LocationRecurringServiceResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates a single recurring service (By ID).
+                ''' </summary>
+                ''' <param name="id">The recurring service ID</param>
+                ''' <param name="payload">The update payload</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a ModificationResponse (If successful) or a ServiceTitanError.</returns>
+                Public Shared Function updateRecurringService(ByVal id As Integer, ByVal payload As LocationRecurringServiceUpdateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/recurring-services/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PATCH"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of membership types.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters for the API.</param>
+                ''' <returns>Returns either a list of membership types (MembershipTypeResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getMembershipTypesList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/membership-types"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As MembershipTypeResponse_P = JsonConvert.DeserializeObject(Of MembershipTypeResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets discounts for the given membership type
+                ''' </summary>
+                ''' <param name="id">Membership type ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a list of Membership Type Discounts (List of(MembershipTypeDiscountItemResponse)) or a ServiceTitanError.</returns>
+                Public Shared Function getMembershipTypeDiscounts(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/membership-types/" & id & "/discounts"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of MembershipTypeDiscountItemResponse) = JsonConvert.DeserializeObject(Of List(Of MembershipTypeDiscountItemResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets duration/billing options for the given membership type
+                ''' </summary>
+                ''' <param name="id">The membership Type ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/parameters (For this endpoint, only 'active' is accepted)</param>
+                ''' <returns>Returns either a 'List(Of MembershipTypeDurationBillingItemResponse)' or a ServiceTitanError.</returns>
+                Public Shared Function getMembershipTypeDurationBillingItems(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/membership-types/" & id & "/duration-billing-items"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of MembershipTypeDurationBillingItemResponse) = JsonConvert.DeserializeObject(Of List(Of MembershipTypeDurationBillingItemResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single membership type (By it's ID)
+                ''' </summary>
+                ''' <param name="id">The membership type's ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a MembershipTypeResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getMembershipType(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/membership-types/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As MembershipTypeResponse = JsonConvert.DeserializeObject(Of MembershipTypeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of Service Items for a specific Membership Type's Recurring event.
+                ''' </summary>
+                ''' <param name="id">The membership type ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a 'List (Of MembershipTypeRecurringServiceItemResponse)' or a ServiceTitanError.</returns>
+                Public Shared Function getMembershipTypeRecurringServiceItems(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/membership-types/" & id & "/recurring-service-items"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of MembershipTypeRecurringServiceItemResponse) = JsonConvert.DeserializeObject(Of List(Of MembershipTypeRecurringServiceItemResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a paginated list of Recurring Service Types.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/parameters</param>
+                ''' <returns>Either returns a paginated list of recurring service types (RecurringServiceTypeResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getRecurringServiceTypeList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/recurring-service-types"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As RecurringServiceTypeResponse_P = JsonConvert.DeserializeObject(Of RecurringServiceTypeResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single Recurring Service Type by it's ID.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="id">The recurring service type's ID.</param>
+                ''' <returns>Either returns a RecurringServiceTypeResponse or a ServiceTitanError.</returns>
+
+                Public Shared Function getRecurringServiceType(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/memberships/v2/tenant/" & tenant & "/recurring-service-types/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As RecurringServiceTypeResponse = JsonConvert.DeserializeObject(Of RecurringServiceTypeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+            End Class
+            Public Class Payroll
+                Inherits Types.Payroll
+                ''' <summary>
+                ''' Gets a list of activity codes.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of options/parameters.</param>
+                ''' <returns>Either returns a paginated list of activity codes (PayrollActivityCodeResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getActivityCodeList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/activity-codes"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollActivityCodeResponse_P = JsonConvert.DeserializeObject(Of PayrollActivityCodeResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a single activity code, by it's ID.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="id">The activity code ID</param>
+                ''' <returns>Either returns a single activity code (PayrollActivityCodeResponse) or a ServiceTitanError.</returns>
+
+                Public Shared Function getActivityCode(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/activity-codes/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollActivityCodeResponse = JsonConvert.DeserializeObject(Of PayrollActivityCodeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new Gross Pay Item record.
+                ''' </summary>
+                ''' <param name="payload">The gross pay item create request</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns the ID of the created item (In the form of a ModificationResponse) or a ServiceTitanError.</returns>
+                Public Shared Function createGrossPayItem(ByVal payload As GrossPayItemCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/gross-pay-items"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As modificationResponse = JsonConvert.DeserializeObject(Of modificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Deletes a specific Gross Pay Item.
+                ''' </summary>
+                ''' <param name="id">The Gross Pay Item's ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns nothing (If successful) or returns a ServiceTitanError.</returns>
+                Public Shared Function deleteGrossPayItem(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/gross-pay-items/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "DELETE"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        'Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of gross pay items matching what is requested.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of filters/parameters</param>
+                ''' <returns>Either returns a paginated list of gross pay items (GrossPayItemResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getGrossPayItemList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/gross-pay-items"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As GrossPayItemResponse_P = JsonConvert.DeserializeObject(Of GrossPayItemResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Updates an existing Gross Pay Item record
+                ''' </summary>
+                ''' <param name="payload">The updated Gross Pay Item</param>
+                ''' <param name="id">The Gross Pay Item ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>If successful, returns a ModificationResponse. If not, returns a ServiceTitanError.</returns>
+                Public Shared Function updateGrossPayItem(ByVal payload As GrossPayItemCreateRequest, ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/gross-pay-items/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "PUT"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of splits for a specific job id.
+                ''' </summary>
+                ''' <param name="id">The job ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a list of JobSplitResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getJobSplits(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/jobs/" & id & "/splits"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As List(Of JobSplitResponse) = JsonConvert.DeserializeObject(Of List(Of JobSplitResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Creates a new payroll adjustment.
+                ''' </summary>
+                ''' <param name="payload">The payroll adjustment</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Either returns a ModificationResponse or a ServiceTitanError.</returns>
+                Public Shared Function createPayrollAdjustment(ByVal payload As PayrollAdjustmentCreateRequest, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/payroll-adjustments"
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "POST"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        req.ContentLength = bytearray.Length
+                        req.Timeout = 999999
+                        Dim datastream As Stream = req.GetRequestStream
+                        datastream.Write(bytearray, 0, bytearray.Length)
+                        datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As ModificationResponse = JsonConvert.DeserializeObject(Of ModificationResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of payroll adjustments, based on your parameters/filters.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters</param>
+                ''' <returns>Either returns a list of payroll adjustments (PayrollAdjustmentResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getPayrollAdjustmentList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/payroll-adjustments"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollAdjustmentResponse_P = JsonConvert.DeserializeObject(Of PayrollAdjustmentResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a specific payroll adjustment record, by it's ID.
+                ''' </summary>
+                ''' <param name="id">The payroll adjustment ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a PayrollAdjustmentResponse, or a ServiceTitanError.</returns>
+                Public Shared Function getPayrollAdjustment(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/payroll-adjustments/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollAdjustmentResponse = JsonConvert.DeserializeObject(Of PayrollAdjustmentResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets an employee's payroll records, based on the employee's ID.
+                ''' </summary>
+                ''' <param name="id">The employee's ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters</param>
+                ''' <returns>Either returns a paginated list of Payroll records (PayrollResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getEmployeePayrollRecords(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/employees/" & id & "/payrolls"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollResponse_P = JsonConvert.DeserializeObject(Of PayrollResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets payroll records.
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters</param>
+                ''' <returns>Either returns a paginated list of Payroll records (PayrollResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getPayrollRecords(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/payrolls"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollResponse_P = JsonConvert.DeserializeObject(Of PayrollResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a technician's payroll records, based on the employee's ID.
+                ''' </summary>
+                ''' <param name="id">The technician's ID.</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters</param>
+                ''' <returns>Either returns a paginated list of Payroll records (PayrollResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getTechnicianPayrollRecords(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/technicians/" & id & "/payrolls"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As PayrollResponse_P = JsonConvert.DeserializeObject(Of PayrollResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a list of timesheet codes
+                ''' </summary>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <param name="options">A list of parameters/filters.</param>
+                ''' <returns>Either returns a paginated list of timesheet codes (TimesheetCodeResponse_P) or a ServiceTitanError.</returns>
+                Public Shared Function getTimesheetCodes(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/timesheet-codes"
+
+                        Dim counter As Integer = 0
+                        If options IsNot Nothing Then
+                            If options.Count > 0 Then
+                                counter = 1
+                                For Each item In options
+                                    If counter = 1 Then
+                                        baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    Else
+                                        baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                                    End If
+                                    counter &= 1
+                                Next
+                            End If
+                        End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As TimesheetCodeResponse_P = JsonConvert.DeserializeObject(Of TimesheetCodeResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
+                        Return newerror
+                    End Try
+                End Function
+                ''' <summary>
+                ''' Gets a specific timesheet code, by it's ID.
+                ''' </summary>
+                ''' <param name="id">The timesheet code ID</param>
+                ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+                ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+                ''' <param name="tenant">Your Tenant ID</param>
+                ''' <returns>Returns either a TimesheetCodeResponse or a ServiceTitanError.</returns>
+                Public Shared Function getTimesheetCode(ByVal id As Integer, ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer) As Object
+
+                    Try
+                        Dim timespan As TimeSpan = Now - lastQuery
+                        If lastQuery <> DateTime.MinValue And timespan.TotalMilliseconds < minMsSinceLastQuery Then
+                            'Try to avoid getting hit by the rate limiter by sleeping it off
+                            Threading.Thread.Sleep((minMsSinceLastQuery - timespan.TotalMilliseconds) + 100)
+                        End If
+
+                        Dim domain As String
+                        If useSandbox = True Then
+                            domain = "https://" & sandboxEnvironment
+                        Else
+                            domain = "https://" & productionEnvironment
+
+                        End If
+                        Dim baseurl As String = domain & "/payroll/v2/tenant/" & tenant & "/timesheet-codes/" & id
+
+                        'Dim counter As Integer = 0
+                        'If options IsNot Nothing Then
+                        '    If options.Count > 0 Then
+                        '        counter = 1
+                        '        For Each item In options
+                        '            If counter = 1 Then
+                        '                baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            Else
+                        '                baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                        '            End If
+                        '            counter &= 1
+                        '        Next
+                        '    End If
+                        'End If
+
+
+                        Console.WriteLine("Executing: " & baseurl)
+                        Dim req As WebRequest = WebRequest.Create(baseurl)
+                        req.Method = "GET"
+                        req.Timeout = 999999
+                        req.Headers.Add("ST-App-Key", STAppKey)
+                        req.Headers.Add("Authorization", accesstoken.access_token)
+                        req.ContentType = "application/json"
+
+                        'Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                        'req.ContentLength = bytearray.Length
+                        'req.Timeout = 999999
+                        'Dim datastream As Stream = req.GetRequestStream
+                        'datastream.Write(bytearray, 0, bytearray.Length)
+                        'datastream.Close()
+
+                        Dim response As WebResponse = req.GetResponse
+                        Dim buffer As Stream = response.GetResponseStream
+                        Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
+                        Dim output As String = streamread.ReadToEnd
+                        Dim results As TimesheetCodeResponse = JsonConvert.DeserializeObject(Of TimesheetCodeResponse)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        'Dim results As Object = Nothing
+                        streamread.Close()
+                        buffer.Close()
+                        response.Close()
+                        Return results
+                    Catch ex As WebException
+                        Dim newerror As ServiceTitanError = ErrorHandling.ProcessError(ex)
                         Return newerror
                     End Try
                 End Function
