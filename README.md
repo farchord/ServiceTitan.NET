@@ -9,7 +9,20 @@ Here is what is implemented:
 
 Accounting functions are about 98% done (Pending updates from the Integrations team, look for 'TODO' comments),
 CRM.
-Rest is not done yet.
+Dispatch
+Equipment Systems
+Inventory
+Job Planning and Management
+Marketing
+Memberships
+Payroll
+
+Left to do: 
+Pricebook
+Sales & Estimates
+Settings
+Task Management
+Telecom
 
 Documentation available here: https://developer.servicetitan.io/
 ServiceTitan is a cloud platform helping the service industry manage their businesses. Find more at https://www.servicetitan.com
