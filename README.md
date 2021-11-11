@@ -16,13 +16,14 @@ Here is what is implemented:
 - Marketing
 - Memberships
 - Payroll
-
-Left to do: 
 - Pricebook
 - Sales & Estimates
 - Settings
 - Task Management
 - Telecom
+
+Left to do: 
+Testing
 
 Documentation available here: https://developer.servicetitan.io/
 ServiceTitan is a cloud platform helping the service industry manage their businesses. Find more at https://www.servicetitan.com
