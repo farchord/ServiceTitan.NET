@@ -97,8 +97,8 @@ Public Class ServiceTitan
                 Public Property royaltySentOn As String
                 Public Property royaltyMemo As String
                 Public Property exportId As String
-                Public Property items() As New InvoiceItemUpdateRequest
-                Public Property payments() As PaymentSettlementUpdateRequest
+                Public Property items As New InvoiceItemUpdateRequest
+                Public Property payments As List(Of PaymentSettlementUpdateRequest)
                 Public Property adjustmentToId As Integer
             End Class
 
@@ -161,14 +161,14 @@ Public Class ServiceTitan
                 Public Property royalty As RoyaltyResponse
                 Public Property employeeInfo As EmployeeInfoResponse
                 Public Property commissionEligibilityDate As String
-                Public Property items() As InvoiceItemResponse
-                Public Property customFields() As CustomFieldResponse
+                Public Property items As List(Of InvoiceItemResponse)
+                Public Property customFields As List(Of CustomFieldResponse)
             End Class
 
             Public Class SalesTaxResponse
                 Public Property id As Integer
                 Public Property name As String
-                Public Property taxRate As Integer
+                Public Property taxRate As Decimal
             End Class
 
             Public Class NameFieldResponse
@@ -211,7 +211,13 @@ Public Class ServiceTitan
                 Public Property name As String
                 Public Property modifiedOn As DateTime
             End Class
-
+            Public Class InvoiceResponse_P
+                Public Property page As Integer
+                Public Property pageSize As Integer
+                Public Property hasMore As Boolean
+                Public Property data As List(Of InvoiceResponse)
+                Public Property totalCount As Integer
+            End Class
             Public Class InvoiceItemResponse
                 Public Property id As Integer
                 Public Property description As String
@@ -232,7 +238,7 @@ Public Class ServiceTitan
                 Public Property membershipTypeId As Integer
                 Public Property itemGroup As ItemGroupResponse
                 Public Property displayName As String
-                Public Property soldHours As Integer
+                Public Property soldHours As Decimal
                 Public Property modifiedOn As DateTime
                 Public Property serviceDate As String
                 Public Property order As Integer
@@ -278,17 +284,17 @@ Public Class ServiceTitan
                 Public Property royaltySentOn As DateTime
                 Public Property royaltyMemo As String
                 Public Property exportId As String
-                Public Property items() As InvoiceItemUpdateRequest
-                Public Property payments() As PaymentSettlementUpdateRequest
+                Public Property items As List(Of InvoiceItemUpdateRequest)
+                Public Property payments As List(Of PaymentSettlementUpdateRequest)
             End Class
 
             Public Class CustomFieldUpdateRequest
-                Public Property operations() As CustomFieldOperationRequest
+                Public Property operations As List(Of CustomFieldOperationRequest)
             End Class
 
             Public Class CustomFieldOperationRequest
                 Public Property objectId As Integer
-                Public Property customFields() As CustomFieldPairRequest
+                Public Property customFields As List(Of CustomFieldPairRequest)
             End Class
 
             Public Class CustomFieldPairRequest
@@ -305,7 +311,7 @@ Public Class ServiceTitan
                 Public Property exportId As String
                 Public Property transactionStatus As PaymentStatus
                 Public Property status As PaymentStatus
-                Public Property splits() As PaymentSplitApiModel
+                Public Property splits As List(Of PaymentSplitApiModel)
             End Class
 
             Public Class TransactionProcessingStatus
@@ -325,7 +331,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As PaymentResponse
+                Public Property data As List(Of PaymentResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -341,7 +347,7 @@ Public Class ServiceTitan
                 Public Property exportId As String
                 Public Property transactionStatus As TransactionProcessingStatus
                 Public Property status As PaymentStatus
-                Public Property splits() As PaymentSplitApiModel
+                Public Property splits As List(Of PaymentSplitApiModel)
             End Class
 
             Public Class DetailedPaymentResponse
@@ -359,8 +365,8 @@ Public Class ServiceTitan
                 Public Property batch As NamedFieldResponse
                 Public Property createdBy As String
                 Public Property generalLedgerAccount As GLAccountResponse
-                Public Property appliedTo() As PaymentAppliedResponse
-                Public Property customFields() As CustomFieldModel
+                Public Property appliedTo As List(Of PaymentAppliedResponse)
+                Public Property customFields As List(Of CustomFieldModel)
                 Public Property authCode As String
                 Public Property checkNumber As String
             End Class
@@ -385,7 +391,7 @@ Public Class ServiceTitan
             End Class
             Public Class PaymentStatusBatchRequest
                 Public Property status As PaymentStatus
-                Public Property paymentIds() As Integer
+                Public Property paymentIds As List(Of Integer)
             End Class
 
             Public Class PaymentUpdateRequest
@@ -398,7 +404,7 @@ Public Class ServiceTitan
                 Public Property exportId As String
                 Public Property transactionStatus As TransactionProcessingStatus
                 Public Property status As String
-                Public Property splits() As PaymentSplitApiModel
+                Public Property splits As List(Of PaymentSplitApiModel)
             End Class
 
             Public Class PaymentTermModel
@@ -456,7 +462,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As PaymentTypeResponse
+                Public Property data As List(Of PaymentTypeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -470,7 +476,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As TaxZoneResponse
+                Public Property data As List(Of TaxZoneResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -480,7 +486,7 @@ Public Class ServiceTitan
                 Public Property color As Integer
                 Public Property isTaxRateSeparated As Boolean
                 Public Property isMultipleTaxZone As Boolean
-                Public Property rates() As TaxRateResponse
+                Public Property rates As List(Of TaxRateResponse)
                 Public Property createdOn As DateTime
                 Public Property active As Boolean
             End Class
@@ -488,8 +494,8 @@ Public Class ServiceTitan
             Public Class TaxRateResponse
                 Public Property id As Integer
                 Public Property taxName As String
-                Public Property taxBaseType() As String
-                Public Property taxRate As Integer
+                Public Property taxBaseType As List(Of String)
+                Public Property taxRate As Decimal
                 Public Property salesTaxItem As String
             End Class
 
@@ -526,7 +532,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As LeadResponse
+                Public Property data As List(Of LeadResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -534,7 +540,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As TagsResponse
+                Public Property data As List(Of TagsResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -553,7 +559,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As AppointmentAssignmentResponse
+                Public Property data As List(Of AppointmentAssignmentResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -576,7 +582,7 @@ Public Class ServiceTitan
             Public Class CapacityQueryFilter
                 Public Property startsOnOrAfter As DateTime
                 Public Property endsOnOrBefore As DateTime
-                Public Property businessUnitIds() As Integer
+                Public Property businessUnitIds As List(Of Integer)
                 Public Property jobTypeId As Integer
                 Public Property skillBasedAvailability As Boolean
             End Class
@@ -585,7 +591,7 @@ Public Class ServiceTitan
             Public Class CapacityResponse
                 Public Property startsOnOrAfter As String
                 Public Property endsOnOrBefore As String
-                Public Property businessUnitIds() As Integer
+                Public Property businessUnitIds As List(Of Integer)
                 Public Property jobTypeId As Integer
                 Public Property skillBasedAvailability As Boolean
             End Class
@@ -594,7 +600,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As TechnicianShiftResponse
+                Public Property data As List(Of TechnicianShiftResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -630,7 +636,7 @@ Public Class ServiceTitan
                 Public Property manufacturerWarrantyEnd As DateTime
                 Public Property serviceProviderWarrantyStart As DateTime
                 Public Property serviceProviderWarrantyEnd As DateTime
-                Public Property customFields() As CustomFieldRequestModel
+                Public Property customFields As List(Of CustomFieldRequestModel)
             End Class
 
             Public Class CustomFieldRequestModel
@@ -654,7 +660,7 @@ Public Class ServiceTitan
                 Public Property manufacturerWarrantyEnd As DateTime
                 Public Property serviceProviderWarrantyStart As DateTime
                 Public Property serviceProviderWarrantyEnd As DateTime
-                Public Property customFields() As CustomFieldResponseModel
+                Public Property customFields As List(Of CustomFieldResponseModel)
             End Class
 
             Public Class CustomFieldResponseModel
@@ -668,7 +674,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As InstalledEquipmentResponse
+                Public Property data As List(Of InstalledEquipmentResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -701,7 +707,7 @@ Public Class ServiceTitan
                 Public Property manufacturerWarrantyEnd As DateTime
                 Public Property serviceProviderWarrantyStart As DateTime
                 Public Property serviceProviderWarrantyEnd As DateTime
-                Public Property customFields() As CustomFieldRequestModel
+                Public Property customFields As List(Of CustomFieldRequestModel)
             End Class
 
 
@@ -729,7 +735,7 @@ Public Class ServiceTitan
                 Public Property requiredOn As DateTime
                 Public Property tax As Integer
                 Public Property shipping As Integer
-                Public Property items() As CreatePurchaseOrderItemRequest
+                Public Property items As List(Of CreatePurchaseOrderItemRequest)
             End Class
 
             Public Class CreateAddressRequest
@@ -758,7 +764,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As PurchaseOrderResponse
+                Public Property data As List(Of PurchaseOrderResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -787,8 +793,8 @@ Public Class ServiceTitan
                 Public Property tax As Integer
                 Public Property shipping As Integer
                 Public Property summary As String
-                Public Property items() As PurchaseOrderItemResponse
-                Public Property customFields() As CustomFieldApiModel
+                Public Property items As List(Of PurchaseOrderItemResponse)
+                Public Property customFields As List(Of CustomFieldApiModel)
             End Class
 
             Public Class AddressResponse
@@ -812,7 +818,7 @@ Public Class ServiceTitan
                 Public Property quantityReceived As Integer
                 Public Property cost As Integer
                 Public Property total As Integer
-                Public Property serialNumbers() As SerialNumberResponse
+                Public Property serialNumbers As List(Of SerialNumberResponse)
                 Public Property status As String
                 Public Property chargeable As Boolean
             End Class
@@ -845,8 +851,8 @@ Public Class ServiceTitan
                 Public Property requiredOn As DateTime
                 Public Property tax As Integer
                 Public Property shipping As Integer
-                Public Property items() As UpdatePurchaseOrderItemRequest
-                Public Property removedItems() As RemovePurchaseOrderItemRequest
+                Public Property items As List(Of UpdatePurchaseOrderItemRequest)
+                Public Property removedItems As List(Of RemovePurchaseOrderItemRequest)
             End Class
 
             Public Class UpdateAddressRequest
@@ -872,7 +878,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As VendorResponse
+                Public Property data As List(Of VendorResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -904,7 +910,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As CallReasonResponse
+                Public Property data As List(Of CallReasonResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -925,7 +931,7 @@ Public Class ServiceTitan
                 Public Property _end As DateTime
                 Public Property arrivalWindowStart As DateTime
                 Public Property arrivalWindowEnd As DateTime
-                Public Property technicianIds() As Integer
+                Public Property technicianIds As List(Of Integer)
                 Public Property specialInstructions As String
             End Class
 
@@ -955,7 +961,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As AppointmentResponse
+                Public Property data As List(Of AppointmentResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -976,7 +982,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As JobCancelReasonResponse
+                Public Property data As List(Of JobCancelReasonResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -990,7 +996,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As JobHoldReasonResponse
+                Public Property data As List(Of JobHoldReasonResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1012,16 +1018,16 @@ Public Class ServiceTitan
                 Public Property jobTypeId As Integer
                 Public Property priority As String
                 Public Property campaignId As Integer
-                Public Property appointments() As AppointmentInformation
+                Public Property appointments As List(Of AppointmentInformation)
                 Public Property summary As String
-                Public Property customFields() As CustomFieldApiModel
-                Public Property tagTypeIds() As Integer
+                Public Property customFields As List(Of CustomFieldApiModel)
+                Public Property tagTypeIds As List(Of Integer)
                 Public Property externalData As ExternalDataUpdateRequest
             End Class
 
             Public Class ExternalDataUpdateRequest
                 Public Property applicationGuid As String
-                Public Property externalData() As ExternalDataModel
+                Public Property externalData As List(Of ExternalDataModel)
             End Class
 
             Public Class ExternalDataModel
@@ -1035,7 +1041,7 @@ Public Class ServiceTitan
                 Public Property _end As DateTime
                 Public Property arrivalWindowStart As DateTime
                 Public Property arrivalWindowEnd As DateTime
-                Public Property technicianIds() As Integer
+                Public Property technicianIds As List(Of Integer)
             End Class
 
             Public Class CustomFieldApiModel
@@ -1056,7 +1062,7 @@ Public Class ServiceTitan
                 Public Property priority As String
                 Public Property campaignId As Integer
                 Public Property summary As String
-                Public Property customFields() As CustomFieldApiModel
+                Public Property customFields As List(Of CustomFieldApiModel)
                 Public Property appointmentCount As Integer
                 Public Property firstAppointmentId As Integer
                 Public Property lastAppointmentId As Integer
@@ -1068,11 +1074,11 @@ Public Class ServiceTitan
                 Public Property createdOn As DateTime
                 Public Property createdById As Integer
                 Public Property modifiedOn As DateTime
-                Public Property tagTypeIds() As Integer
+                Public Property tagTypeIds As List(Of Integer)
                 Public Property leadCallId As Integer
                 Public Property bookingId As Integer
                 Public Property soldById As Integer
-                Public Property externalData() As ExternalDataUpdateRequest
+                Public Property externalData As List(Of ExternalDataUpdateRequest)
             End Class
 
             Public Class JobGeneratedLeadSource
@@ -1096,7 +1102,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As CancelReasonResponse
+                Public Property data As List(Of CancelReasonResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1108,7 +1114,7 @@ Public Class ServiceTitan
             End Class
 
             Public Class JobHistoryResponse
-                Public Property history() As JobHistoryItemModel
+                Public Property history As List(Of JobHistoryItemModel)
             End Class
 
             Public Class JobHistoryItemModel
@@ -1124,7 +1130,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As JobResponse
+                Public Property data As List(Of JobResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1132,7 +1138,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As NoteResponse
+                Public Property data As List(Of NoteResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1150,8 +1156,8 @@ Public Class ServiceTitan
                 Public Property campaignId As Integer
                 Public Property summary As String
                 Public Property shouldUpdateInvoiceItems As Boolean
-                Public Property customFields() As CustomFieldApiModel
-                Public Property tagIds() As Integer
+                Public Property customFields As List(Of CustomFieldApiModel)
+                Public Property tagIds As List(Of Integer)
                 Public Property externalData As ExternalDataUpdateRequest
             End Class
 
@@ -1169,14 +1175,14 @@ Public Class ServiceTitan
                 Public Property id As Integer
                 Public Property name As String
                 Public Property modifiedOn As DateTime
-                Public Property externalData() As ExternalDataUpdateRequest
+                Public Property externalData As List(Of ExternalDataUpdateRequest)
             End Class
 
             Public Class JobTypeResponse_P
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As JobTypeResponse
+                Public Property data As List(Of JobTypeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1184,7 +1190,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As ProjectResponse
+                Public Property data As List(Of ProjectResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1198,7 +1204,7 @@ Public Class ServiceTitan
                 Public Property startDate As DateTime
                 Public Property targetCompletionDate As DateTime
                 Public Property actualCompletionDate As DateTime
-                Public Property customFields() As CustomFieldApiModel
+                Public Property customFields As List(Of CustomFieldApiModel)
             End Class
 
 
@@ -1266,7 +1272,7 @@ Public Class ServiceTitan
             End Class
 
             Public Class CampaignModel_P
-                Public Property data() As CampaignModel
+                Public Property data As List(Of CampaignModel)
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property totalCount As Integer
@@ -1319,7 +1325,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As CustomerMembershipResponse
+                Public Property data As List(Of CustomerMembershipResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1407,7 +1413,7 @@ Public Class ServiceTitan
 
             Public Class InvoiceTemplateCreateRequest
                 Public Property name As String
-                Public Property items() As InvoiceTemplateItemCreateRequest
+                Public Property items As List(Of InvoiceTemplateItemCreateRequest)
             End Class
 
             Public Class InvoiceTemplateItemCreateRequest
@@ -1428,7 +1434,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As InvoiceTemplateResponse
+                Public Property data As List(Of InvoiceTemplateResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1439,7 +1445,7 @@ Public Class ServiceTitan
                 Public Property total As Integer
                 Public Property isSettingsTemplate As Boolean
                 Public Property importId As String
-                Public Property items() As InvoiceTemplateItemResponse
+                Public Property items As List(Of InvoiceTemplateItemResponse)
             End Class
 
             Public Class InvoiceTemplateItemResponse
@@ -1465,7 +1471,7 @@ Public Class ServiceTitan
                 Public Property createdOn As DateTime
                 Public Property createdById As Integer
                 Public Property active As Boolean
-                Public Property items() As InvoiceTemplateItemUpdateRequest
+                Public Property items As List(Of InvoiceTemplateItemUpdateRequest)
             End Class
 
             Public Class InvoiceTemplateItemUpdateRequest
@@ -1483,7 +1489,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As LocationRecurringServiceEventResponse
+                Public Property data As List(Of LocationRecurringServiceEventResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1507,7 +1513,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As LocationRecurringServiceResponse
+                Public Property data As List(Of LocationRecurringServiceResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1540,11 +1546,11 @@ Public Class ServiceTitan
                 Public Property jobSummary As String
                 Public Property recurrenceType As ServiceRecurrenceType
                 Public Property recurrenceInterval As Integer
-                Public Property recurrenceMonths() As String
-                Public Property recurrenceDaysOfWeek() As String
+                Public Property recurrenceMonths As List(Of String)
+                Public Property recurrenceDaysOfWeek As List(Of String)
                 Public Property recurrenceWeek As WeekDay
                 Public Property recurrenceDayOfNthWeek As DayOfWeek
-                Public Property recurrenceDaysOfMonth() As Integer
+                Public Property recurrenceDaysOfMonth As List(Of Integer)
                 Public Property jobStartTime As String
                 Public Property estimatedPayrollCost As Integer
             End Class
@@ -1586,8 +1592,8 @@ Public Class ServiceTitan
                 Public Property jobSummary As String
                 Public Property recurrenceType As String
                 Public Property recurrenceInterval As Integer
-                Public Property recurrenceMonths() As String
-                Public Property recurrenceDaysOfWeek() As String
+                Public Property recurrenceMonths As List(Of String)
+                Public Property recurrenceDaysOfWeek As List(Of String)
                 Public Property recurrenceWeek As String
                 Public Property recurrenceDayOfNthWeek As DayOfWeek
                 Public Property jobStartTime As String
@@ -1598,7 +1604,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As MembershipTypeResponse
+                Public Property data As List(Of MembershipTypeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1670,7 +1676,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As RecurringServiceTypeResponse
+                Public Property data As List(Of RecurringServiceTypeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1679,7 +1685,7 @@ Public Class ServiceTitan
                 Public Property active As Boolean
                 Public Property recurrenceType As ServiceRecurrenceType
                 Public Property recurrenceInterval As Integer
-                Public Property recurrenceMonths() As String
+                Public Property recurrenceMonths As List(Of String)
                 Public Property durationType As ServiceRecurrenceDuration
                 Public Property durationLength As Integer
                 Public Property invoiceTemplateId As Integer
@@ -1710,7 +1716,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As PayrollActivityCodeResponse
+                Public Property data As List(Of PayrollActivityCodeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1738,7 +1744,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As GrossPayItemResponse
+                Public Property data As List(Of GrossPayItemResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1826,7 +1832,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As PayrollAdjustmentResponse
+                Public Property data As List(Of PayrollAdjustmentResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1846,7 +1852,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As PayrollResponse
+                Public Property data As List(Of PayrollResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1870,7 +1876,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As TimesheetCodeResponse
+                Public Property data As List(Of TimesheetCodeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -1916,16 +1922,16 @@ Public Class ServiceTitan
                 Public Property position As Integer
                 Public Property image As String
                 Public Property categoryType As String
-                Public Property businessUnitIds() As Integer
-                Public Property skuImages() As String
-                Public Property skuVideos() As String
+                Public Property businessUnitIds As List(Of Integer)
+                Public Property skuImages As List(Of String)
+                Public Property skuVideos As List(Of String)
             End Class
             Public Class CategoryResponse_P
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
                 Public Property totalCount As Integer
-                Public Property data() As CategoryResponse
+                Public Property data As List(Of CategoryResponse)
             End Class
             Public Class CategoryResponse
                 Public Property id As Integer
@@ -1937,9 +1943,9 @@ Public Class ServiceTitan
                 Public Property position As Integer
                 Public Property categoryType As CategoryType
                 Public Property subcategories As CategoryResponse
-                Public Property businessUnitIds() As Integer
-                Public Property skuImages() As String
-                Public Property skuVideos() As String
+                Public Property businessUnitIds As List(Of Integer)
+                Public Property skuImages As List(Of String)
+                Public Property skuVideos As List(Of String)
                 Public Property source As String
                 Public Property externalId As String
             End Class
@@ -1954,9 +1960,9 @@ Public Class ServiceTitan
                 Public Property position As Integer
                 Public Property image As String
                 Public Property categoryType As String
-                Public Property businessUnitIds() As Integer
-                Public Property skuImages() As String
-                Public Property skuVideos() As String
+                Public Property businessUnitIds As List(Of Integer)
+                Public Property skuImages As List(Of String)
+                Public Property skuVideos As List(Of String)
             End Class
 
             Public Class DiscountAndFeesCreateRequest
@@ -1968,9 +1974,9 @@ Public Class ServiceTitan
                 Public Property amount As Integer
                 Public Property limit As Integer
                 Public Property taxable As Boolean
-                Public Property categories() As Integer
+                Public Property categories As List(Of Integer)
                 Public Property hours As Integer
-                Public Property assets() As SkuAssetResponse
+                Public Property assets As List(Of SkuAssetResponse)
                 Public Property account As String
                 Public Property crossSaleGroup As String
                 Public Property active As Boolean
@@ -1997,9 +2003,9 @@ Public Class ServiceTitan
                 Public Property amount As Integer
                 Public Property limit As Integer
                 Public Property taxable As Boolean
-                Public Property categories() As Integer
+                Public Property categories As List(Of Integer)
                 Public Property hours As Integer
-                Public Property assets() As SkuAssetResponse
+                Public Property assets As List(Of SkuAssetResponse)
                 Public Property account As String
                 Public Property crossSaleGroup As String
                 Public Property active As Boolean
@@ -2013,7 +2019,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As DiscountAndFeesResponse
+                Public Property data As List(Of DiscountAndFeesResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2026,9 +2032,9 @@ Public Class ServiceTitan
                 Public Property amount As Integer
                 Public Property limit As Integer
                 Public Property taxable As Boolean
-                Public Property categories() As Integer
+                Public Property categories As List(Of Integer)
                 Public Property hours As Integer
-                Public Property assets() As SkuAssetRequest
+                Public Property assets As List(Of SkuAssetRequest)
                 Public Property account As String
                 Public Property crossSaleGroup As String
                 Public Property active As Boolean
@@ -2058,13 +2064,13 @@ Public Class ServiceTitan
                 Public Property model As String
                 Public Property manufacturerWarranty As SkuWarrantyRequest
                 Public Property serviceProviderWarranty As SkuWarrantyRequest
-                Public Property assets() As SkuAssetRequest
-                Public Property recommendations() As EquipmentRecommendationResponse
-                Public Property upgrades() As Integer
-                Public Property equipmentMaterials() As SkuLinkResponse
-                Public Property categories() As Integer
+                Public Property assets As List(Of SkuAssetRequest)
+                Public Property recommendations As List(Of EquipmentRecommendationResponse)
+                Public Property upgrades As List(Of Integer)
+                Public Property equipmentMaterials As List(Of SkuLinkResponse)
+                Public Property categories As List(Of Integer)
                 Public Property primaryVendor As SkuVendorResponse
-                Public Property otherVendors() As SkuVendorResponse
+                Public Property otherVendors As List(Of SkuVendorResponse)
                 Public Property account As String
                 Public Property costOfSaleAccount As String
                 Public Property assetAccount As String
@@ -2091,7 +2097,7 @@ Public Class ServiceTitan
                 Public Property cost As Integer
                 Public Property active As Boolean
                 Public Property primarySubAccount As SkuVendorSubAccountResponse
-                Public Property otherSubAccounts() As SkuVendorSubAccountResponse
+                Public Property otherSubAccounts As List(Of SkuVendorSubAccountResponse)
             End Class
 
 
@@ -2114,7 +2120,7 @@ Public Class ServiceTitan
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
                 Public Property totalCount As Integer
-                Public Property data() As EquipmentResponse
+                Public Property data As List(Of EquipmentResponse)
             End Class
 
             Public Class EquipmentResponse
@@ -2131,13 +2137,13 @@ Public Class ServiceTitan
                 Public Property model As String
                 Public Property manufacturerWarranty As SkuWarrantyResponse
                 Public Property serviceProviderWarranty As SkuWarrantyResponse
-                Public Property categories() As Integer
-                Public Property assets() As SkuAssetResponse
-                Public Property recommendations() As EquipmentRecommendationResponse
-                Public Property upgrades() As Integer
-                Public Property equipmentMaterials() As SkuLinkResponse
+                Public Property categories As List(Of Integer)
+                Public Property assets As List(Of SkuAssetResponse)
+                Public Property recommendations As List(Of EquipmentRecommendationResponse)
+                Public Property upgrades As List(Of Integer)
+                Public Property equipmentMaterials As List(Of SkuLinkResponse)
                 Public Property primaryVendor As SkuVendorResponse
-                Public Property otherVendors() As SkuVendorResponse
+                Public Property otherVendors As List(Of SkuVendorResponse)
                 Public Property account As String
                 Public Property costOfSaleAccount As String
                 Public Property assetAccount As String
@@ -2172,13 +2178,13 @@ Public Class ServiceTitan
                 Public Property model As String
                 Public Property manufacturerWarranty As SkuWarrantyRequest
                 Public Property serviceProviderWarranty As SkuWarrantyRequest
-                Public Property assets() As SkuAssetRequest
-                Public Property recommendations() As SkuLinkRequest
-                Public Property upgrades() As Integer
-                Public Property equipmentMaterials() As SkuLinkRequest
-                Public Property categories() As Integer
+                Public Property assets As List(Of SkuAssetRequest)
+                Public Property recommendations As List(Of SkuLinkRequest)
+                Public Property upgrades As List(Of Integer)
+                Public Property equipmentMaterials As List(Of SkuLinkRequest)
+                Public Property categories As List(Of Integer)
                 Public Property primaryVendor As SkuVendorRequest
-                Public Property otherVendors() As SkuVendorRequest
+                Public Property otherVendors As List(Of SkuVendorRequest)
                 Public Property account As String
                 Public Property costOfSaleAccount As String
                 Public Property assetAccount As String
@@ -2209,7 +2215,7 @@ Public Class ServiceTitan
                 Public Property cost As Integer
                 Public Property active As Boolean
                 Public Property primarySubAccount As SkuVendorSubAccountRequest
-                Public Property otherSubAccounts() As SkuVendorSubAccountRequest
+                Public Property otherSubAccounts As List(Of SkuVendorSubAccountRequest)
             End Class
 
             Public Class SkuVendorSubAccountRequest
@@ -2246,16 +2252,16 @@ Public Class ServiceTitan
                 Public Property assetAccount As String
                 Public Property taxable As Boolean
                 Public Property primaryVendor As SkuVendorRequest
-                Public Property otherVendors() As SkuVendorRequest
-                Public Property assets() As SkuAssetResponse
-                Public Property categories() As Integer
+                Public Property otherVendors As List(Of SkuVendorRequest)
+                Public Property assets As List(Of SkuAssetResponse)
+                Public Property categories As List(Of Integer)
             End Class
 
             Public Class MaterialResponse_P
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As MaterialResponse
+                Public Property data As List(Of MaterialResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2281,9 +2287,9 @@ Public Class ServiceTitan
                 Public Property assetAccount As String
                 Public Property taxable As Boolean
                 Public Property primaryVendor As SkuVendorResponse
-                Public Property otherVendors() As SkuVendorResponse
-                Public Property categories() As Integer
-                Public Property assets() As SkuAssetResponse
+                Public Property otherVendors As List(Of SkuVendorResponse)
+                Public Property categories As List(Of Integer)
+                Public Property assets As List(Of SkuAssetResponse)
                 Public Property modifiedOn As DateTime
                 Public Property source As String
                 Public Property externalId As String
@@ -2310,9 +2316,9 @@ Public Class ServiceTitan
                 Public Property assetAccount As String
                 Public Property taxable As Boolean
                 Public Property primaryVendor As SkuVendorRequest
-                Public Property otherVendors() As SkuVendorRequest
-                Public Property assets() As SkuAssetResponse
-                Public Property categories() As Integer
+                Public Property otherVendors As List(Of SkuVendorRequest)
+                Public Property assets As List(Of SkuAssetResponse)
+                Public Property categories As List(Of Integer)
             End Class
 
 
@@ -2321,7 +2327,7 @@ Public Class ServiceTitan
                 Public Property displayName As String
                 Public Property description As String
                 Public Property warranty As SkuWarrantyRequest
-                Public Property categories() As Integer
+                Public Property categories As List(Of Integer)
                 Public Property price As Integer
                 Public Property memberPrice As Integer
                 Public Property addOnPrice As Integer
@@ -2330,11 +2336,11 @@ Public Class ServiceTitan
                 Public Property account As String
                 Public Property hours As Integer
                 Public Property isLabor As Boolean
-                Public Property recommendations() As Integer
-                Public Property upgrades() As Integer
-                Public Property assets() As SkuAssetResponse
-                Public Property serviceMaterials() As SkuLinkResponse
-                Public Property serviceEquipment() As SkuLinkResponse
+                Public Property recommendations As List(Of Integer)
+                Public Property upgrades As List(Of Integer)
+                Public Property assets As List(Of SkuAssetResponse)
+                Public Property serviceMaterials As List(Of SkuLinkResponse)
+                Public Property serviceEquipment As List(Of SkuLinkResponse)
                 Public Property active As Boolean
                 Public Property crossSaleGroup As String
                 Public Property paysCommission As Boolean
@@ -2347,7 +2353,7 @@ Public Class ServiceTitan
                 Public Property displayName As String
                 Public Property description As String
                 Public Property warranty As SkuWarrantyResponse
-                Public Property categories() As SkuCategoryResponse
+                Public Property categories As List(Of SkuCategoryResponse)
                 Public Property price As Integer
                 Public Property memberPrice As Integer
                 Public Property addOnPrice As Integer
@@ -2356,11 +2362,11 @@ Public Class ServiceTitan
                 Public Property account As String
                 Public Property hours As Integer
                 Public Property isLabor As Boolean
-                Public Property recommendations() As Integer
-                Public Property upgrades() As Integer
-                Public Property assets() As SkuAssetResponse
-                Public Property serviceMaterials() As SkuLinkResponse
-                Public Property serviceEquipment() As SkuLinkResponse
+                Public Property recommendations As List(Of Integer)
+                Public Property upgrades As List(Of Integer)
+                Public Property assets As List(Of SkuAssetResponse)
+                Public Property serviceMaterials As List(Of SkuLinkResponse)
+                Public Property serviceEquipment As List(Of SkuLinkResponse)
                 Public Property active As Boolean
                 Public Property crossSaleGroup As String
                 Public Property paysCommission As Boolean
@@ -2381,7 +2387,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As ServiceResponse
+                Public Property data As List(Of ServiceResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2390,7 +2396,7 @@ Public Class ServiceTitan
                 Public Property displayName As String
                 Public Property description As String
                 Public Property warranty As SkuWarrantyRequest
-                Public Property categories() As Integer
+                Public Property categories As List(Of Integer)
                 Public Property price As Integer
                 Public Property memberPrice As Integer
                 Public Property addOnPrice As Integer
@@ -2399,11 +2405,11 @@ Public Class ServiceTitan
                 Public Property account As String
                 Public Property hours As Integer
                 Public Property isLabor As Boolean
-                Public Property recommendations() As Integer
-                Public Property upgrades() As Integer
-                Public Property assets() As SkuAssetResponse
-                Public Property serviceMaterials() As SkuLinkResponse
-                Public Property serviceEquipment() As SkuLinkResponse
+                Public Property recommendations As List(Of Integer)
+                Public Property upgrades As List(Of Integer)
+                Public Property assets As List(Of SkuAssetResponse)
+                Public Property serviceMaterials As List(Of SkuLinkResponse)
+                Public Property serviceEquipment As List(Of SkuLinkResponse)
                 Public Property active As Boolean
                 Public Property crossSaleGroup As String
                 Public Property paysCommission As Boolean
@@ -2430,8 +2436,8 @@ Public Class ServiceTitan
                 Public Property name As String
                 Public Property summary As String
                 Public Property tax As Integer
-                Public Property items() As EstimateItemCreateUpdateRequest
-                Public Property externalLinks() As ExternalLinkInModel
+                Public Property items As List(Of EstimateItemCreateUpdateRequest)
+                Public Property externalLinks As List(Of ExternalLinkInModel)
                 Public Property jobId As Integer
             End Class
 
@@ -2481,8 +2487,8 @@ Public Class ServiceTitan
                 Public Property modifiedOn As DateTime
                 Public Property soldOn As DateTime
                 Public Property soldBy As Integer
-                Public Property items() As EstimateItemResponse
-                Public Property externalLinks() As ExternalLinkResponse
+                Public Property items As List(Of EstimateItemResponse)
+                Public Property externalLinks As List(Of ExternalLinkResponse)
             End Class
 
             Public Class EstimateStatusModel
@@ -2508,7 +2514,7 @@ Public Class ServiceTitan
                 Public Property name As String
                 Public Property displayName As String
                 Public Property type As String
-                Public Property soldHours As Integer
+                Public Property soldHours As Decimal
                 Public Property generalLedgerAccountId As Integer
                 Public Property generalLedgerAccountName As String
                 Public Property modifiedOn As DateTime
@@ -2523,7 +2529,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As EstimateItemResponse
+                Public Property data As List(Of EstimateItemResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2531,7 +2537,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As EstimateResponse
+                Public Property data As List(Of EstimateResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2545,8 +2551,8 @@ Public Class ServiceTitan
                 Public Property name As String
                 Public Property summary As String
                 Public Property tax As Integer
-                Public Property items() As EstimateItemCreateUpdateRequest
-                Public Property externalLinks() As ExternalLinkInModel
+                Public Property items As List(Of EstimateItemCreateUpdateRequest)
+                Public Property externalLinks As List(Of ExternalLinkInModel)
             End Class
 
 
@@ -2604,7 +2610,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As BusinessUnitResponse
+                Public Property data As List(Of BusinessUnitResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2617,7 +2623,7 @@ Public Class ServiceTitan
                 Public Property email As String
                 Public Property phoneNumber As String
                 Public Property loginName As String
-                Public Property customFields() As EmployeeCustomFieldResponse
+                Public Property customFields As List(Of EmployeeCustomFieldResponse)
                 Public Property active As Boolean
             End Class
 
@@ -2634,7 +2640,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As EmployeeResponse
+                Public Property data As List(Of EmployeeResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2643,7 +2649,7 @@ Public Class ServiceTitan
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
                 Public Property totalCount As Integer
-                Public Property data() As TagTypeResponse
+                Public Property data As List(Of TagTypeResponse)
             End Class
 
             Public Class TagTypeResponse
@@ -2656,7 +2662,7 @@ Public Class ServiceTitan
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
-                Public Property data() As TechnicianResponse
+                Public Property data As List(Of TechnicianResponse)
                 Public Property totalCount As Integer
             End Class
 
@@ -2671,7 +2677,7 @@ Public Class ServiceTitan
                 Public Property home As TechnicianAddressResponse
                 Public Property dailyGoal As Integer
                 Public Property isManagedTech As Boolean
-                Public Property customFields() As TechnicianCustomFieldResponse
+                Public Property customFields As List(Of TechnicianCustomFieldResponse)
                 Public Property active As Boolean
             End Class
 
@@ -2697,14 +2703,14 @@ Public Class ServiceTitan
         Public Class TaskManagement
 
             Public Class ClientSideDataResponse
-                Public Property employees() As ClientSideEmployeeResponse
-                Public Property businessUnits() As ClientSideBusinessUnitResponse
-                Public Property taskPriorities() As ClientSideTaskPriorityResponse
-                Public Property taskResolutionTypes() As ClientSideTaskResolutionTypeResponse
-                Public Property taskStatuses() As ClientSideTaskStatusResponse
-                Public Property taskTypes() As ClientSideTaskTypeResponse
-                Public Property taskSources() As ClientSideTaskSourceResponse
-                Public Property taskResolutions() As ClientSideTaskResolutionResponse
+                Public Property employees As List(Of ClientSideEmployeeResponse)
+                Public Property businessUnits As List(Of ClientSideBusinessUnitResponse)
+                Public Property taskPriorities As List(Of ClientSideTaskPriorityResponse)
+                Public Property taskResolutionTypes As List(Of ClientSideTaskResolutionTypeResponse)
+                Public Property taskStatuses As List(Of ClientSideTaskStatusResponse)
+                Public Property taskTypes As List(Of ClientSideTaskTypeResponse)
+                Public Property taskSources As List(Of ClientSideTaskSourceResponse)
+                Public Property taskResolutions As List(Of ClientSideTaskResolutionResponse)
             End Class
 
             Public Class ClientSideEmployeeResponse
@@ -2734,7 +2740,7 @@ Public Class ServiceTitan
                 Public Property id As Integer
                 Public Property name As String
                 Public Property active As Boolean
-                Public Property excludedTaskResolutionIds() As Integer
+                Public Property excludedTaskResolutionIds As List(Of Integer)
             End Class
 
             Public Class ClientSideTaskSourceResponse
@@ -2748,7 +2754,7 @@ Public Class ServiceTitan
                 Public Property name As String
                 Public Property type As String
                 Public Property active As Boolean
-                Public Property excludedTaskTypeIds() As Integer
+                Public Property excludedTaskTypeIds As List(Of Integer)
             End Class
 
             Public Class TaskCreateRequest
@@ -2762,7 +2768,7 @@ Public Class ServiceTitan
                 Public Property employeeTaskResolutionId As Integer
                 Public Property reportedDate As String
                 Public Property completeBy As String
-                Public Property involvedEmployeeIdList() As Integer
+                Public Property involvedEmployeeIdList As List(Of Integer)
                 Public Property customerId As Integer
                 Public Property jobId As Integer
                 Public Property description As String
@@ -2799,7 +2805,7 @@ Public Class ServiceTitan
                 Public Property employeeTaskResolutionId As Integer
                 Public Property reportedDate As DateTime
                 Public Property completeBy As DateTime
-                Public Property involvedEmployeeIdList() As Integer
+                Public Property involvedEmployeeIdList As List(Of Integer)
                 Public Property customerId As Integer
                 Public Property jobId As Integer
                 Public Property description As String
@@ -2860,7 +2866,7 @@ Public Class ServiceTitan
                 Public Property id As Integer
                 Public Property name As String
                 Public Property address As AddressInput
-                Public Property contacts() As ContactInputModel
+                Public Property contacts As List(Of ContactInputModel)
             End Class
 
             Public Class AddressInput
@@ -2885,7 +2891,7 @@ Public Class ServiceTitan
                 Public Property id As Integer
                 Public Property name As String
                 Public Property address As AddressInput
-                Public Property contacts() As ContactInputModel
+                Public Property contacts As List(Of ContactInputModel)
             End Class
 
             Public Class DetailedCallModel
@@ -2914,7 +2920,7 @@ Public Class ServiceTitan
                 Public Property pageSize As Integer
                 Public Property hasMore As Boolean
                 Public Property totalCount As Integer
-                Public Property data() As CallReasonResponse
+                Public Property data As List(Of CallReasonResponse)
             End Class
 
             Public Class CallReasonResponse
@@ -2947,15 +2953,15 @@ Public Class ServiceTitan
                 Public Property importId As String
                 Public Property doNotService As Boolean
                 Public Property type As String
-                Public Property contacts() As ContactOutputModel
+                Public Property contacts As List(Of ContactOutputModel)
                 Public Property mergedToId As Integer
                 Public Property modifiedOn As DateTime
-                Public Property memberships() As MembershipModel
+                Public Property memberships As List(Of MembershipModel)
                 Public Property hasActiveMembership As Boolean
-                Public Property customFields() As CustomFieldApiModel
+                Public Property customFields As List(Of CustomFieldApiModel)
                 Public Property createdOn As DateTime
                 Public Property createdBy As Integer
-                Public Property phoneSettings() As CustomerPhoneModel
+                Public Property phoneSettings As List(Of CustomerPhoneModel)
             End Class
 
             Public Class AddressOutput
@@ -3028,7 +3034,7 @@ Public Class ServiceTitan
             End Class
 
             Public Class BundleCallModel_P
-                Public Property data() As BundleCallModel
+                Public Property data As List(Of BundleCallModel)
                 Public Property page As Integer
                 Public Property pageSize As Integer
                 Public Property totalCount As Integer
@@ -3252,13 +3258,13 @@ Public Class ServiceTitan
                     End Try
                 End Function
                 ''' <summary>
-                ''' Gets a full list of invoices matching your specified filters. The current implementation of this end point does not support paging, so only page 1 can be retrieved.
+                ''' Gets a full list of invoices matching your specified filters.
                 ''' </summary>
                 ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
                 ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
                 ''' <param name="tenant">Your Tenant ID</param>
                 ''' <param name="options">Your options, if you desire to filter the results (If applicable)</param>
-                ''' <returns>Returns either a list of invoices (if successful) or a ServiceTitanError class (if the request fails).</returns>
+                ''' <returns>Returns either a paginated list of invoices (InvoiceResponse_P) or a ServiceTitanError class.</returns>
                 Public Shared Function getInvoiceList(ByVal accesstoken As oAuth2.AccessToken, ByVal STAppKey As String, ByVal tenant As Integer, Optional ByVal options As List(Of OptionsList) = Nothing) As Object
 
                     Try
@@ -3312,7 +3318,7 @@ Public Class ServiceTitan
                         Dim buffer As Stream = response.GetResponseStream
                         Dim streamread As StreamReader = New StreamReader(buffer, Text.Encoding.UTF8)
                         Dim output As String = streamread.ReadToEnd
-                        Dim results As List(Of InvoiceResponse) = JsonConvert.DeserializeObject(Of List(Of InvoiceResponse))(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
+                        Dim results As InvoiceResponse_P = JsonConvert.DeserializeObject(Of InvoiceResponse_P)(output, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
 
                         streamread.Close()
                         buffer.Close()
