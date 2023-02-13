@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -9,11 +9,12 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic;
 using System.Net;
 using Newtonsoft.Json;
 
-public class ServiceTitan
+namespace ServiceTitan
+{
+  public class ServiceTitan
 {
     public static DateTime lastQuery;
     const int minMsSinceLastQuery = 500;
@@ -22,6 +23,19 @@ public class ServiceTitan
     const string productionAuthEnvironment = "auth.servicetitan.io";
     const string sandboxEnvironment = "api-integration.servicetitan.io";
     const string sandboxAuthEnvironment = "auth-integration.servicetitan.io";
+
+
+
+    public class Helpers {
+        public static Types.CRM.CustomerResponse getCustomerById(oAuth2.AccessToken accesstoken, string appId, int tenantId, int customerId) {
+            var temp = Functions.CRM.getCustomer(accesstoken, appId, tenantId, customerId);
+            Types.CRM.CustomerResponse customer = null;
+            if (temp is Types.CRM.CustomerResponse) {
+                customer = (Types.CRM.CustomerResponse)temp;
+            }
+            return customer;
+        }
+    }
     public class oAuth2
     {
         public class Credentials
@@ -128,9 +142,9 @@ public class ServiceTitan
                 public string skuName { get; set; }
                 public int technicianId { get; set; }
                 public string description { get; set; }
-                public int quantity { get; set; }
-                public int unitPrice { get; set; }
-                public int cost { get; set; }
+                public decimal quantity { get; set; }
+                public decimal unitPrice { get; set; }
+                public decimal cost { get; set; }
                 public bool isAddOn { get; set; }
                 public string signature { get; set; }
                 public string technicianAcknowledgementSignature { get; set; }
@@ -162,7 +176,7 @@ public class ServiceTitan
                 public string referenceNumber { get; set; }
                 public DateTime invoiceDate { get; set; }
                 public DateTime dueDate { get; set; }
-                public decimal subTotal { get; set; }
+                public string subTotal { get; set; }
                 public decimal salesTax { get; set; }
                 public SalesTaxResponse salesTaxCode { get; set; }
                 public decimal total { get; set; }
@@ -563,6 +577,385 @@ public class ServiceTitan
         }
         public class CRM
         {
+            // UPDATED: 01-17-2022
+
+            public class CreateLocationRequest
+            {
+                public string name { get; set; }
+                public Address address { get; set; }
+                public List<Contact> contacts { get; set; }
+                public List<Customfield> customFields { get; set; }
+                public int customerId { get; set; }
+            }
+
+            public class CreatedCustomerResponse
+            {
+                public int id { get; set; }
+                public bool active { get; set; }
+                public string name { get; set; }
+                public Type type { get; set; }
+                public Address address { get; set; }
+                public List<Customfield> customFields { get; set; } = new List<Customfield>();
+                public int balance { get; set; }
+                public bool doNotMail { get; set; }
+                public bool doNotService { get; set; }
+                public DateTime createdOn { get; set; }
+                public int createdById { get; set; }
+                public DateTime modifiedOn { get; set; }
+                public int mergedToId { get; set; }
+                public List<Location> locations { get; set; } = new List<Location>();
+                public List<Contact> contacts { get; set; } = new List<Contact>();
+            }
+
+
+
+            public class BookingResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<BookingResponse> data { get; set; } = new List<BookingResponse>();
+            }
+
+            public class BookingResponse
+            {
+                public int id { get; set; }
+                public string source { get; set; }
+                public DateTime createdOn { get; set; }
+                public string name { get; set; }
+                public Address address { get; set; }
+                public Customertype customerType { get; set; }
+                public DateTime start { get; set; }
+                public string summary { get; set; }
+                public int campaignId { get; set; }
+                public int businessUnitId { get; set; }
+                public bool isFirstTimeClient { get; set; }
+                public string uploadedImages { get; set; }
+                public bool isSendConfirmationEmail { get; set; }
+                public BookingStatus status { get; set; }
+                public int dismissingReasonId { get; set; }
+                public int jobId { get; set; }
+                public string externalId { get; set; }
+                public Priority priority { get; set; }
+                public int jobTypeId { get; set; }
+                public int bookingProviderId { get; set; }
+            }
+
+            public class Address
+            {
+                public string street { get; set; }
+                public string unit { get; set; }
+                public string city { get; set; }
+                public string state { get; set; }
+                public string zip { get; set; }
+                public string country { get; set; }
+            }
+
+            public class Customertype
+            {
+                public string type;
+            }
+
+            public class BookingStatus
+            {
+                public string status;
+            }
+
+            public class Priority
+            {
+                public string priority;
+            }
+
+            public class CreateBookingRequest
+            {
+                public string source { get; set; }
+                public string name { get; set; }
+                public Address address { get; set; }
+                public List<Contact> contacts { get; set; } = new List<Contact>();
+                public string customerType { get; set; }
+                public DateTime start { get; set; }
+                public string summary { get; set; }
+                public int campaignId { get; set; }
+                public int businessUnitId { get; set; }
+                public int jobTypeId { get; set; }
+                public Priority priority { get; set; }
+                public bool isFirstTimeClient { get; set; }
+                public string uploadedImages { get; set; }
+                public bool isSendConfirmationEmail { get; set; }
+                public string externalId { get; set; }
+            }
+
+            public class UpdateBookingRequest
+            {
+                public string source { get; set; }
+                public string name { get; set; }
+                public Address address { get; set; }
+                public Customertype customerType { get; set; }
+                public DateTime start { get; set; }
+                public string summary { get; set; }
+                public int campaignId { get; set; }
+                public int businessUnitId { get; set; }
+                public int jobTypeId { get; set; }
+                public Priority priority { get; set; }
+                public bool isFirstTimeClient { get; set; }
+                public string uploadedImages { get; set; }
+                public string externalId { get; set; }
+            }
+
+
+            public class Contact
+            {
+                public string type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+            }
+
+            public class BookingContactResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<BookingContactResponse> data { get; set; } = new List<BookingContactResponse>();
+            }
+
+            public class BookingContactResponse
+            {
+                public int id { get; set; }
+                public ContactType type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+                public string modifiedOn { get; set; }
+            }
+
+            public class ContactType
+            {
+                public string type { get; set; }
+            }
+
+            public class ContactCreateRequest
+            {
+                public string type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+            }
+
+            public class CustomerResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<CustomerResponse> data { get; set; } = new List<CustomerResponse>();
+            }
+
+            public class CustomerResponse
+            {
+                public int id { get; set; }
+                public bool active { get; set; }
+                public string name { get; set; }
+                public string type { get; set; }
+                public Address address { get; set; }
+                public List<Customfield> customFields { get; set; } = new List<Customfield>();
+                public decimal balance { get; set; }
+                public bool doNotMail { get; set; }
+                public bool doNotService { get; set; }
+                public DateTime createdOn { get; set; }
+                public int createdById { get; set; }
+                public DateTime modifiedOn { get; set; }
+                public int mergedToId { get; set; }
+            }
+
+            public class Type
+            {
+                public string type { get; set; }
+            }
+
+
+
+            public class Customfield
+            {
+                public int typeId { get; set; }
+                public string name { get; set; }
+                public string value { get; set; }
+            }
+
+            public class CreateCustomerRequest
+            {
+                public string name { get; set; }
+                public Type type { get; set; }
+                public bool doNotMail { get; set; }
+                public bool doNotService { get; set; }
+                public List<Location> locations { get; set; } = new List<Location>();
+                public Address address { get; set; }
+                public List<Contact> contacts { get; set; } = new List<Contact>();
+                public List<Customfield> customFields { get; set; } = new List<Customfield>();
+            }
+
+
+            public class Location
+            {
+                public string name { get; set; }
+                public Address address { get; set; }
+                public List<Contact> contacts { get; set; } = new List<Contact>();
+                public List<Customfield> customFields { get; set; } = new List<Customfield>();
+            }
+
+            public class UpdateCustomerRequest
+            {
+                public string name { get; set; }
+                public Type type { get; set; }
+                public Address address { get; set; }
+                public List<Customfield> customFields { get; set; }
+                public bool doNotMail { get; set; }
+                public bool doNotService { get; set; }
+                public bool active { get; set; }
+            }
+
+            public class CustomerContactWithModifiedOnResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<CustomerContactWithModifiedOnResponse> data { get; set; } = new List<CustomerContactWithModifiedOnResponse>();
+            }
+
+            public class CustomerContactWithModifiedOnResponse
+            {
+                public int id { get; set; }
+                public string type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+                public DateTime modifiedOn { get; set; }
+                public Phonesettings phoneSettings { get; set; }
+            }
+
+            public class Phonesettings
+            {
+                public string phoneNumber { get; set; }
+                public bool doNotText { get; set; }
+            }
+
+            public class CreateCustomerContactRequest
+            {
+                public Type type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+            }
+            public class UpdateCustomerContactRequest
+            {
+                public Type type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+            }
+
+            public class NoteResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<NoteResponse> data { get; set; } = new List<NoteResponse>();
+            }
+
+            public class NoteResponse
+            {
+                public string text { get; set; }
+                public bool isPinned { get; set; }
+                public int createdById { get; set; }
+                public DateTime createdOn { get; set; }
+                public DateTime modifiedOn { get; set; }
+            }
+
+            public class CreateCustomerNoteRequest
+            {
+                public string text { get; set; }
+                public bool pinToTop { get; set; }
+                public bool addToLocations { get; set; }
+            }
+
+            public class LocationResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<LocationResponse> data { get; set; } = new List<LocationResponse>();
+            }
+
+            public class LocationResponse
+            {
+                public int id { get; set; }
+                public int customerId { get; set; }
+                public bool active { get; set; }
+                public string name { get; set; }
+                public Address address { get; set; }
+                public List<Customfield> customFields { get; set; } = new List<Customfield>();
+                public DateTime createdOn { get; set; }
+                public int createdById { get; set; }
+                public DateTime modifiedOn { get; set; }
+                public int mergedToId { get; set; }
+                public int taxZoneId { get; set; }
+            }
+
+            public class CreateLocationResponse
+            {
+                public int taxZoneId { get; set; }
+                public int id { get; set; }
+                public int customerId { get; set; }
+                public bool active { get; set; }
+                public string name { get; set; }
+                public Address address { get; set; }
+                public List<Customfield> customFields { get; set; }
+                public DateTime createdOn { get; set; }
+                public int createdById { get; set; }
+                public DateTime modifiedOn { get; set; }
+                public int mergedToId { get; set; }
+                public List<Contact> contacts { get; set; }
+            }
+
+
+            public class UpdateLocationRequest
+            {
+                public int customerId { get; set; }
+                public string name { get; set; }
+                public Address address { get; set; }
+                public bool active { get; set; }
+                public int taxZoneId { get; set; }
+                public List<Customfield> customFields { get; set; } = new List<Customfield>();
+            }
+
+            public class LocationContactResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<LocationContactResponse> data { get; set; } = new List<LocationContactResponse>();
+            }
+
+            public class LocationContactResponse
+            {
+                public int id { get; set; }
+                public Type type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+                public Phonesettings phoneSettings { get; set; }
+                public string modifiedOn { get; set; }
+            }
+
+            public class LocationContactUpdateRequest
+            {
+                public Type type { get; set; }
+                public string value { get; set; }
+                public string memo { get; set; }
+            }
+
+
+            // END OF UPDATE
+
             public class LeadResponse
             {
                 public int id { get; set; }
@@ -586,10 +979,7 @@ public class ServiceTitan
                 public string status { get; set; }
             }
 
-            public class Priority
-            {
-                public string priority { get; set; }
-            }
+
 
             public class LeadResponse_P
             {
@@ -618,6 +1008,64 @@ public class ServiceTitan
         }
         public class Dispatch
         {
+            // UPDATED: 1/17/2022
+
+            public class NonJobAppointmentResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public int totalCount { get; set; }
+                public List<NonJobAppointmentResponse> data { get; set; } = new List<NonJobAppointmentResponse>();
+            }
+
+            public class NonJobAppointmentResponse
+            {
+                public int id { get; set; }
+                public int technicianId { get; set; }
+                public DateTime start { get; set; }
+                public string name { get; set; }
+                public string duration { get; set; }
+                public int timesheetCodeId { get; set; }
+                public string summary { get; set; }
+                public bool clearDispatchBoard { get; set; }
+                public bool clearTechnicianView { get; set; }
+                public bool removeTechnicianFromCapacityPlanning { get; set; }
+                public bool allDay { get; set; }
+                public bool active { get; set; }
+                public DateTime createdOn { get; set; }
+                public int createdById { get; set; }
+            }
+
+            public class NonJobAppointmentCreateRequest
+            {
+                public int technicianId { get; set; }
+                public DateTime start { get; set; }
+                public string duration { get; set; }
+                public string name { get; set; }
+                public int timesheetCodeId { get; set; }
+                public string summary { get; set; }
+                public bool clearDispatchBoard { get; set; }
+                public bool clearTechnicianView { get; set; }
+                public bool removeTechnicianFromCapacityPlanning { get; set; }
+            }
+
+            public class NonJobAppointmentUpdateRequest
+            {
+                public int technicianId { get; set; }
+                public DateTime start { get; set; }
+                public string duration { get; set; }
+                public string name { get; set; }
+                public int timesheetCodeId { get; set; }
+                public string summary { get; set; }
+                public bool clearDispatchBoard { get; set; }
+                public bool clearTechnicianView { get; set; }
+                public bool removeTechnicianFromCapacityPlanning { get; set; }
+            }
+
+
+
+            // END OF UPDATE
             public class AppointmentAssignmentResponse_P
             {
                 public int page { get; set; }
@@ -634,7 +1082,7 @@ public class ServiceTitan
                 public string technicianName { get; set; }
                 public int assignedById { get; set; }
                 public DateTime assignedOn { get; set; }
-                public JobAppointmentAssignmentStatus status { get; set; }
+                public string status { get; set; }
                 public bool isPaused { get; set; }
                 public int jobId { get; set; }
                 public int appointmentId { get; set; }
@@ -787,8 +1235,47 @@ public class ServiceTitan
                 public List<CustomFieldRequestModel> customFields { get; set; }
             }
         }
+        public class Forms {
+            public class FormSubmissionResponse {
+                public int id {get; set;}
+                public int formId {get; set;}
+                public string formName {get; set;}
+                public DateTime submittedOn {get; set;}
+                public int createdById {get; set;}
+                public string status {get; set;}
+                public List<FormOwner> owners {get; set;}
+                public List<FormUnit> units {get; set;} 
+            }
+            public class FormOwner {
+                public string type {get; set;}
+                public int id {get; set;}
+
+            }
+            public class FormUnit {
+                // May be null, content/type depends on unit type
+                public object value {get; set;}
+                // may be null, content/type depends on unit type
+                public List<object> values {get; set;}
+                public string name {get; set;}
+                public string type {get; set;}
+                // Assuming string for now, may not always be?
+                public string options {get; set;}
+                public string comment {get; set;}
+                public List<object> attachments {get; set;}
+                // Seems to only be used if the unit type is "Section", may be wrong
+                public List<FormUnit> units {get; set;}
+            }
+            public class FormSubmissionResponse_P {
+                public int page {get; set;}
+                public int pageSize {get; set;}
+                public Boolean hasMore {get; set;}
+                public int totalCount {get; set;}
+                public List<FormSubmissionResponse> data {get; set;}
+            }
+        }
         public class Inventory
         {
+            
             public class CreatePurchaseOrderResponse
             {
                 public int id;
@@ -848,7 +1335,23 @@ public class ServiceTitan
                 public List<PurchaseOrderResponse> data { get; set; }
                 public int totalCount { get; set; }
             }
+            public class WarehouseResponse_P
+            {
+                public int page { get; set; }
+                public int pageSize { get; set; }
+                public bool hasMore { get; set; }
+                public List<WarehouseResponse> data { get; set; }
+                public int totalCount { get; set; }
+            }
+            public class WarehouseResponse {
+                public int id {get; set;}
+                public string name {get; set;}
+                public Boolean active {get; set;}
+                public AddressResponse address;
+                public DateTime createdOn;
+                public DateTime modifiedOn;
 
+            }
             public class PurchaseOrderResponse
             {
                 public int id { get; set; }
@@ -982,7 +1485,7 @@ public class ServiceTitan
                 public bool isMobileCreationRestricted { get; set; }
                 public string memo { get; set; }
                 public string deliveryOption { get; set; }
-                public int defaultTaxRate { get; set; }
+                public decimal defaultTaxRate { get; set; }
                 public VendorContactInfoResponse contactInfo { get; set; }
                 public AddressResponse address { get; set; }
             }
@@ -1034,11 +1537,12 @@ public class ServiceTitan
                 public int id { get; set; }
                 public int jobId { get; set; }
                 public string appointmentNumber { get; set; }
-                public string start { get; set; }
-                public string _end { get; set; }
+                public DateTime start { get; set; }
+                [JsonProperty("end")]
+                public DateTime _end { get; set; }
                 public DateTime arrivalWindowStart { get; set; }
                 public DateTime arrivalWindowEnd { get; set; }
-                public Status status { get; set; }
+                public string status { get; set; }
                 public string specialInstructions { get; set; }
                 public DateTime createdOn { get; set; }
                 public DateTime modifiedOn { get; set; }
@@ -1460,12 +1964,12 @@ public class ServiceTitan
                 public DateTime nextScheduledBillDate { get; set; }
                 [JsonProperty("to")]
                 public DateTime _to { get; set; }
-                public MembershipRecurrenceType billingFrequency { get; set; }
-                public MembershipRecurrenceType renewalBillingFrequency { get; set; }
-                public MembershipStatus status { get; set; }
-                public OpportunityStatus followUpStatus { get; set; }
+                public string billingFrequency { get; set; }
+                public string renewalBillingFrequency { get; set; }
+                public string status { get; set; }
+                public string followUpStatus { get; set; }
                 public bool active { get; set; }
-                public int initialDeferredRevenue { get; set; }
+                public decimal initialDeferredRevenue { get; set; }
                 public int duration { get; set; }
                 public int renewalDuration { get; set; }
                 public int businessUnitId { get; set; }
@@ -1490,27 +1994,17 @@ public class ServiceTitan
                 public string memo { get; set; }
             }
 
-            public class MembershipRecurrenceType
-            {
-                public string RecurrenceType { get; set; }
-            }
 
 
-            public class MembershipStatus
-            {
-                public string status { get; set; }
-            }
 
-            public class OpportunityStatus
-            {
-                public string status { get; set; }
-            }
+
+            
 
             public class CustomerMembershipUpdateRequest
             {
                 public int businessUnitId { get; set; }
                 public DateTime nextScheduledBillDate { get; set; }
-                public MembershipStatus status { get; set; }
+                public string status { get; set; }
                 public string memo { get; set; }
                 public DateTime from { get; set; }
                 [JsonProperty("to")]
@@ -1523,7 +2017,7 @@ public class ServiceTitan
                 public int paymentMethodId { get; set; }
                 public int paymentTypeId { get; set; }
                 public int renewalMembershipTaskId { get; set; }
-                public int initialDeferredRevenue { get; set; }
+                public decimal initialDeferredRevenue { get; set; }
                 public int cancellationBalanceInvoiceId { get; set; }
                 public int cancellationInvoiceId { get; set; }
                 public bool active { get; set; }
@@ -1636,7 +2130,7 @@ public class ServiceTitan
                 public string locationRecurringServiceName { get; set; }
                 public int membershipId { get; set; }
                 public string membershipName { get; set; }
-                public OpportunityStatus status { get; set; }
+                public string status { get; set; }
                 [JsonProperty("date")]
                 public DateTime _date { get; set; }
                 public DateTime createdOn { get; set; }
@@ -1713,13 +2207,13 @@ public class ServiceTitan
             public class WeekDay
             {
                 [JsonProperty("WeekDay")]
-                public string WeekDayName { get; set; }
+                public string WeekDayProp { get; set; }
             }
 
             public class DayOfWeek
             {
                 [JsonProperty("DayOfWeek")]
-                public string DayOfWeekName { get; set; }
+                public string DayOfWeekProp { get; set; }
             }
 
             public class LocationRecurringServiceUpdateRequest
@@ -1803,7 +2297,7 @@ public class ServiceTitan
             {
                 public int id { get; set; }
                 public int duration { get; set; }
-                public MembershipRecurrenceType billingFrequency { get; set; }
+                public string billingFrequency { get; set; }
                 public int salePrice { get; set; }
                 public int billingPrice { get; set; }
                 public int renewalPrice { get; set; }
@@ -1878,7 +2372,7 @@ public class ServiceTitan
                 public int id { get; set; }
                 public string name { get; set; }
                 public string code { get; set; }
-                public PayrollEarningCategory earningCategory { get; set; }
+                public string earningCategory { get; set; }
             }
 
             public class PayrollEarningCategory
@@ -1889,7 +2383,7 @@ public class ServiceTitan
             public class GrossPayItemCreateRequest
             {
                 public int payrollId { get; set; }
-                public int amount { get; set; }
+                public decimal amount { get; set; }
                 public int activityCodeId { get; set; }
                 [JsonProperty("date")]
                 public DateTime _date { get; set; }
@@ -1909,7 +2403,7 @@ public class ServiceTitan
             {
                 public int id { get; set; }
                 public int employeeId { get; set; }
-                public EmployeeType employeeType { get; set; }
+                public string employeeType { get; set; }
                 public string businessUnitName { get; set; }
                 public int payrollId { get; set; }
                 [JsonProperty("date")]
@@ -1917,14 +2411,14 @@ public class ServiceTitan
                 public string activity { get; set; }
                 public int activityCodeId { get; set; }
                 public string activityCode { get; set; }
-                public int amount { get; set; }
-                public int amountAdjustment { get; set; }
+                public decimal amount { get; set; }
+                public decimal amountAdjustment { get; set; }
                 public string payoutBusinessUnitName { get; set; }
-                public GrossPayItemType grossPayItemType { get; set; }
-                public string startTime { get; set; }
-                public string endTime { get; set; }
-                public int paidDurationHours { get; set; }
-                public PaidTimeType paidTimeType { get; set; }
+                public string grossPayItemType { get; set; }
+                public DateTime startedOn { get; set; }
+                public DateTime endedOn { get; set; }
+                public decimal paidDurationHours { get; set; }
+                public string paidTimeType { get; set; }
                 public int jobId { get; set; }
                 public string jobNumber { get; set; }
                 public string jobTypeName { get; set; }
@@ -1946,10 +2440,7 @@ public class ServiceTitan
                 public bool isPrevailingWageJob { get; set; }
             }
 
-            public class EmployeeType
-            {
-                public string type { get; set; }
-            }
+
 
             public class GrossPayItemType
             {
@@ -1980,7 +2471,7 @@ public class ServiceTitan
 
             public class PayrollAdjustmentCreateRequest
             {
-                public EmployeeType employeeType { get; set; }
+                public string employeeType { get; set; }
                 public int employeeId { get; set; }
                 public DateTime postedOn { get; set; }
                 public int amount { get; set; }
@@ -2002,7 +2493,7 @@ public class ServiceTitan
             public class PayrollAdjustmentResponse
             {
                 public int id { get; set; }
-                public EmployeeType employeeType { get; set; }
+                public string employeeType { get; set; }
                 public int employeeId { get; set; }
                 public DateTime postedOn { get; set; }
                 public int amount { get; set; }
@@ -2024,11 +2515,11 @@ public class ServiceTitan
             public class PayrollResponse
             {
                 public int id { get; set; }
-                public DateTime fromDate { get; set; }
-                public DateTime toDate { get; set; }
+                public DateTime startedOn { get; set; }
+                public DateTime endedOn { get; set; }
                 public int employeeId { get; set; }
-                public EmployeeType employeeType { get; set; }
-                public PayrollStatus status { get; set; }
+                public string employeeType { get; set; }
+                public string status { get; set; }
             }
 
 
@@ -2053,7 +2544,7 @@ public class ServiceTitan
                 public int id { get; set; }
                 public string code { get; set; }
                 public string description { get; set; }
-                public TimesheetCodeType type { get; set; }
+                public string type { get; set; }
                 public TimesheetCodeEmployeeType applicableEmployeeType { get; set; }
                 public TimesheetCodeRateInfoResponse rateInfo { get; set; }
             }
@@ -2277,7 +2768,7 @@ public class ServiceTitan
                 public int vendorId { get; set; }
                 public string memo { get; set; }
                 public string vendorPart { get; set; }
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public bool active { get; set; }
                 public SkuVendorSubAccountResponse primarySubAccount { get; set; }
                 public List<SkuVendorSubAccountResponse> otherSubAccounts { get; set; }
@@ -2286,7 +2777,7 @@ public class ServiceTitan
 
             public class SkuVendorSubAccountResponse
             {
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public string accountName { get; set; }
             }
 
@@ -2405,7 +2896,7 @@ public class ServiceTitan
                 public int vendorId { get; set; }
                 public string memo { get; set; }
                 public string vendorPart { get; set; }
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public bool active { get; set; }
                 public SkuVendorSubAccountRequest primarySubAccount { get; set; }
                 public List<SkuVendorSubAccountRequest> otherSubAccounts { get; set; }
@@ -2413,7 +2904,7 @@ public class ServiceTitan
 
             public class SkuVendorSubAccountRequest
             {
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public string accountName { get; set; }
             }
 
@@ -2431,14 +2922,14 @@ public class ServiceTitan
                 public string code { get; set; }
                 public string displayName { get; set; }
                 public string description { get; set; }
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public bool active { get; set; }
-                public int price { get; set; }
-                public int memberPrice { get; set; }
-                public int addOnPrice { get; set; }
-                public int addOnMemberPrice { get; set; }
-                public int hours { get; set; }
-                public int commissionBonus { get; set; }
+                public decimal price { get; set; }
+                public decimal memberPrice { get; set; }
+                public decimal addOnPrice { get; set; }
+                public decimal addOnMemberPrice { get; set; }
+                public decimal hours { get; set; }
+                public decimal commissionBonus { get; set; }
                 public bool paysCommission { get; set; }
                 public bool deductAsJobCost { get; set; }
                 public string unitOfMeasure { get; set; }
@@ -2468,14 +2959,14 @@ public class ServiceTitan
                 public string code { get; set; }
                 public string displayName { get; set; }
                 public string description { get; set; }
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public bool active { get; set; }
-                public int price { get; set; }
-                public int memberPrice { get; set; }
-                public int addOnPrice { get; set; }
-                public int addOnMemberPrice { get; set; }
-                public int hours { get; set; }
-                public int commissionBonus { get; set; }
+                public decimal price { get; set; }
+                public decimal memberPrice { get; set; }
+                public decimal addOnPrice { get; set; }
+                public decimal addOnMemberPrice { get; set; }
+                public decimal hours { get; set; }
+                public decimal commissionBonus { get; set; }
                 public bool paysCommission { get; set; }
                 public bool deductAsJobCost { get; set; }
                 public string unitOfMeasure { get; set; }
@@ -2498,14 +2989,14 @@ public class ServiceTitan
                 public string code { get; set; }
                 public string displayName { get; set; }
                 public string description { get; set; }
-                public int cost { get; set; }
+                public decimal cost { get; set; }
                 public bool active { get; set; }
-                public int price { get; set; }
-                public int memberPrice { get; set; }
-                public int addOnPrice { get; set; }
-                public int addOnMemberPrice { get; set; }
-                public int hours { get; set; }
-                public int commissionBonus { get; set; }
+                public decimal price { get; set; }
+                public decimal memberPrice { get; set; }
+                public decimal addOnPrice { get; set; }
+                public decimal addOnMemberPrice { get; set; }
+                public decimal hours { get; set; }
+                public decimal commissionBonus { get; set; }
                 public bool paysCommission { get; set; }
                 public bool deductAsJobCost { get; set; }
                 public string unitOfMeasure { get; set; }
@@ -2544,7 +3035,7 @@ public class ServiceTitan
                 public bool active { get; set; }
                 public string crossSaleGroup { get; set; }
                 public bool paysCommission { get; set; }
-                public int commissionBonus { get; set; }
+                public decimal commissionBonus { get; set; }
             }
 
             public class ServiceResponse
@@ -2698,9 +3189,9 @@ public class ServiceTitan
                 public SkuModel sku { get; set; }
                 public string skuAccount { get; set; }
                 public string description { get; set; }
-                public int qty { get; set; }
-                public int unitRate { get; set; }
-                public int total { get; set; }
+                public decimal qty { get; set; }
+                public decimal unitRate { get; set; }
+                public decimal total { get; set; }
                 public string itemGroupName { get; set; }
                 public int itemGroupRootId { get; set; }
                 public DateTime modifiedOn { get; set; }
@@ -2771,7 +3262,7 @@ public class ServiceTitan
                 public string phoneNumber { get; set; }
                 public string invoiceHeader { get; set; }
                 public string invoiceMessage { get; set; }
-                public int defaultTaxRate { get; set; }
+                public decimal defaultTaxRate { get; set; }
                 public string authorizationParagraph { get; set; }
                 public string acknowledgementParagraph { get; set; }
                 public BusinessUnitAddressResponse address { get; set; }
@@ -2819,7 +3310,7 @@ public class ServiceTitan
             {
                 public int id { get; set; }
                 public string name { get; set; }
-                public EmployeeUserRole role { get; set; }
+                public string role { get; set; }
                 public int businessUnitId { get; set; }
                 public DateTime modifiedOn { get; set; }
                 public string email { get; set; }
@@ -2829,10 +3320,6 @@ public class ServiceTitan
                 public bool active { get; set; }
             }
 
-            public class EmployeeUserRole
-            {
-                public string role { get; set; }
-            }
 
             public class EmployeeCustomFieldResponse
             {
@@ -2884,7 +3371,7 @@ public class ServiceTitan
                 public string phoneNumber { get; set; }
                 public string loginName { get; set; }
                 public TechnicianAddressResponse home { get; set; }
-                public int dailyGoal { get; set; }
+                public decimal dailyGoal { get; set; }
                 public bool isManagedTech { get; set; }
                 public List<TechnicianCustomFieldResponse> customFields { get; set; }
                 public bool active { get; set; }
@@ -2899,8 +3386,8 @@ public class ServiceTitan
                 public string state { get; set; }
                 public string zip { get; set; }
                 public string streetAddress { get; set; }
-                public int latitude { get; set; }
-                public int longitude { get; set; }
+                public decimal latitude { get; set; }
+                public decimal longitude { get; set; }
             }
 
             public class TechnicianCustomFieldResponse
@@ -3051,7 +3538,7 @@ public class ServiceTitan
                 public string duration { get; set; }
                 public CallDirection direction { get; set; }
                 public CallStatus status { get; set; }
-                public CallType callType { get; set; }
+                public string callType { get; set; }
                 public string excuseMemo { get; set; }
                 public int campaignId { get; set; }
                 public int jobId { get; set; }
@@ -3078,11 +3565,6 @@ public class ServiceTitan
                 public string status { get; set; }
             }
 
-            public class CallType
-            {
-                [JsonProperty("CallType")]
-                public string CallTypeName { get; set; }
-            }
 
             public class ReasonInModel
             {
@@ -3106,8 +3588,8 @@ public class ServiceTitan
                 public string city { get; set; }
                 public string state { get; set; }
                 public string zip { get; set; }
-                public int latitude { get; set; }
-                public int longitude { get; set; }
+                public decimal latitude { get; set; }
+                public decimal longitude { get; set; }
             }
 
             public class ContactInputModel
@@ -3131,11 +3613,11 @@ public class ServiceTitan
                 public int id { get; set; }
                 public DateTime receivedOn { get; set; }
                 public string duration { get; set; }
-                public DateTime from { get; set; }
+                public string from { get; set; }
                 [JsonProperty("to")]
-                public DateTime _to { get; set; }
+                public string _to { get; set; }
                 public string direction { get; set; }
-                public CallType callType { get; set; }
+                public string callType { get; set; }
                 public CallReasonModel reason { get; set; }
                 public string recordingUrl { get; set; }
                 public string voiceMailUrl { get; set; }
@@ -3211,8 +3693,8 @@ public class ServiceTitan
                 public string state { get; set; }
                 public string zip { get; set; }
                 public string streetAddress { get; set; }
-                public int latitude { get; set; }
-                public int longitude { get; set; }
+                public decimal latitude { get; set; }
+                public decimal longitude { get; set; }
             }
 
             public class ContactOutputModel
@@ -3310,7 +3792,7 @@ public class ServiceTitan
                 public string phoneNumber { get; set; }
                 public string invoiceHeader { get; set; }
                 public string invoiceMessage { get; set; }
-                public int defaultTaxRate { get; set; }
+                public decimal defaultTaxRate { get; set; }
                 public string authorizationParagraph { get; set; }
                 public string acknowledgementParagraph { get; set; }
                 public BusinessUnitAddressModel address { get; set; }
@@ -3357,11 +3839,11 @@ public class ServiceTitan
                 public int id { get; set; }
                 public DateTime receivedOn { get; set; }
                 public string duration { get; set; }
-                public DateTime from { get; set; }
+                public string from { get; set; }
                 [JsonProperty("to")]
-                public DateTime _to { get; set; }
+                public string _to { get; set; }
                 public string direction { get; set; }
-                public CallType callType { get; set; }
+                public string callType { get; set; }
                 public CallReasonModel reason { get; set; }
                 public string recordingUrl { get; set; }
                 public string voiceMailUrl { get; set; }
@@ -3382,20 +3864,13 @@ public class ServiceTitan
                 public DetailedCallModel leadCall { get; set; }
             }
 
-            public class CallInUpdateModel
+            public class CallInUpdateModelV2
             {
                 public int callId { get; set; }
-                public DateTime createdOn { get; set; }
-                public string duration { get; set; }
-                public CallDirection direction { get; set; }
-                public CallStatus status { get; set; }
-                public CallType callType { get; set; }
-                public string excuseMemo { get; set; }
-                public int campaignId { get; set; }
-                public int jobId { get; set; }
-                public int agentId { get; set; }
-                public string recordingUrl { get; set; }
-                public string recordingId { get; set; }
+                public string callType;
+                public string excuseMemo;
+                public int? campaignId;
+                public int? jobId;
                 public ReasonInModel reason { get; set; }
                 public CustomerInModel customer { get; set; }
                 public LocationInModel location { get; set; }
@@ -3712,7 +4187,7 @@ public class ServiceTitan
             ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
             ///             ''' <param name="tenant">Your Tenant ID</param>
             ///             ''' <returns>If successful, nothing is returned. If the request ends in failure, an instance of ServiceTitanError is returned.</returns>
-            public static object UpdateInvoiceItems(int invoiceId, Types.Accounting.InvoiceUpdateRequest invoice, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
+            public static object UpdateInvoiceItems(int invoiceId, Types.Accounting.InvoiceItemUpdateRequest invoice, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
             {
                 try
                 {
@@ -3975,7 +4450,6 @@ public class ServiceTitan
                     streamread.Close();
                     buffer.Close();
                     response.Close();
-
                     return null;
                 }
 
@@ -4416,6 +4890,667 @@ public class ServiceTitan
         }
         public class CRM : Types.CRM
         {
+            // UPDATED: 1/17/2022
+            /// <summary>
+            ///             ''' Gets a full list of customer contacts, based on the id.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="id">The customer ID</param>
+            ///             ''' <returns>Returns either a paginated list of Customer Contacts (CustomerContactWithModifiedOnResponse_P) or a ServiceTitanError.</returns>
+            public static object getCustomerContacts(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int id, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/customers/" + id + "/contacts";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.CustomerContactWithModifiedOnResponse_P results = JsonConvert.DeserializeObject<Types.CRM.CustomerContactWithModifiedOnResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Gets a full list of customers, based on your filters.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="options">A list of OptionList</param>
+            ///             ''' <returns>Returns either a paginated list of Customers (CustomerResponse_P) or a ServiceTitanError.</returns>
+            public static object getCustomerList(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/customers";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.CustomerResponse_P results = JsonConvert.DeserializeObject<Types.CRM.CustomerResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Gets a single customer, by it's ID.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="customerid">The customer ID to obtain</param>
+            ///             ''' <returns>Returns either a paginated list of Customers (CustomerResponse_P) or a ServiceTitanError.</returns>
+            public static object getCustomer(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int customerid)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/customers/" + customerid;
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.CustomerResponse results = JsonConvert.DeserializeObject<Types.CRM.CustomerResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Creates a new customer record.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="payload">The customer information to add to the new file.</param>
+            ///             ''' <returns>Returns an instance of CreatedCustomerResponse or a ServiceTitanError.</returns>
+            public static object createCustomer(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, Types.CRM.CreateCustomerRequest payload)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/customers";
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "POST";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    byte[] bytearray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    req.ContentLength = bytearray.Length;
+                    req.Timeout = 999999;
+                    Stream datastream = req.GetRequestStream();
+                    datastream.Write(bytearray, 0, bytearray.Length);
+                    datastream.Close();
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.CreatedCustomerResponse results = JsonConvert.DeserializeObject<Types.CRM.CreatedCustomerResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Updates a customer file.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="customerid">The customer ID to update</param>
+            ///             ''' <param name="payload">The data to update the customer with.</param>
+            ///             ''' <returns>Either returns a CustomerResponse, or a ServiceTitanError.</returns>
+            public static object updateCustomer(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int customerid, Types.CRM.UpdateCustomerRequest payload)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/customers/" + customerid;
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "PATCH";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    byte[] bytearray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    req.ContentLength = bytearray.Length;
+                    req.Timeout = 999999;
+                    Stream datastream = req.GetRequestStream();
+                    datastream.Write(bytearray, 0, bytearray.Length);
+                    datastream.Close();
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.CustomerResponse results = JsonConvert.DeserializeObject<Types.CRM.CustomerResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Gets a full list of locations, based on your filters.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="options">A list of OptionList</param>
+            ///             ''' <returns>Returns either a paginated list of locations (LocationResponse_P) or a ServiceTitanError.</returns>
+            public static object getLocationList(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/locations";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.LocationResponse_P results = JsonConvert.DeserializeObject<Types.CRM.LocationResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Gets a single location, by it's ID.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="locationid">The location ID to obtain</param>
+            ///             ''' <returns>Returns either a paginated list of locations (LocationResponse_P) or a ServiceTitanError.</returns>
+            public static object getLocation(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int locationid)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/locations/" + locationid;
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.LocationResponse results = JsonConvert.DeserializeObject<Types.CRM.LocationResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Creates a new location record.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="payload">The location information to add to the new file.</param>
+            ///             ''' <returns>Returns an instance of CreatedLocationResponse or a ServiceTitanError.</returns>
+            public static object createLocation(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, Types.CRM.CreateLocationRequest payload)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/locations";
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "POST";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    byte[] bytearray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    req.ContentLength = bytearray.Length;
+                    req.Timeout = 999999;
+                    Stream datastream = req.GetRequestStream();
+                    datastream.Write(bytearray, 0, bytearray.Length);
+                    datastream.Close();
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.CreatedCustomerResponse results = JsonConvert.DeserializeObject<Types.CRM.CreatedCustomerResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Updates a location file.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="locationid">The location ID to update</param>
+            ///             ''' <param name="payload">The data to update the customer with.</param>
+            ///             ''' <returns>Either returns a LocationResponse, or a ServiceTitanError.</returns>
+            public static object updateLocation(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int locationid, Types.CRM.UpdateLocationRequest payload)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/crm/v2/tenant/" + tenant + "/locations/" + locationid;
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "PATCH";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    byte[] bytearray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    req.ContentLength = bytearray.Length;
+                    req.Timeout = 999999;
+                    Stream datastream = req.GetRequestStream();
+                    datastream.Write(bytearray, 0, bytearray.Length);
+                    datastream.Close();
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.CRM.LocationResponse results = JsonConvert.DeserializeObject<Types.CRM.LocationResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+
+            // END OF UPDATE
+
+
             /// <summary>
             ///             ''' Gets a specific lead by it's internal ID.
             ///             ''' </summary>
@@ -4639,6 +5774,303 @@ public class ServiceTitan
         }
         public class Dispatch : Types.Dispatch
         {
+            // UPDATED: 1/18/22
+
+            /// <summary>
+            ///             ''' Gets a full list of Non-job Appointments, based on your filters.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="options">A list of OptionList</param>
+            ///             ''' <returns>Returns either a paginated list of Non-job appointments (NonJobAppointmentResponse_P) or a ServiceTitanError.</returns>
+            public static object getNonJobAppointmentList(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/dispatch/v2/tenant/" + tenant + "/non-job-appointments";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.Dispatch.NonJobAppointmentResponse_P results = JsonConvert.DeserializeObject<Types.Dispatch.NonJobAppointmentResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Gets a single non-job appointment, by it's ID.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="njaid">The non-job appointment ID to obtain</param>
+            ///             ''' <returns>Returns either a non-job appointment (LocationResponse) or a ServiceTitanError.</returns>
+            public static object getNonJobAppointment(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int njaid)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/dispatch/v2/tenant/" + tenant + "/non-job-appointments/" + njaid;
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.Dispatch.NonJobAppointmentResponse results = JsonConvert.DeserializeObject<Types.Dispatch.NonJobAppointmentResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Creates a new non-job appointment record.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="payload">The non-job appointment information to add to the new file.</param>
+            ///             ''' <returns>Returns an instance of NonJobAppointmentResponse or a ServiceTitanError.</returns>
+            public static object createNonJobAppointment(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, Types.Dispatch.NonJobAppointmentCreateRequest payload)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/dispatch/v2/tenant/" + tenant + "/non-job-appointments";
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "POST";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    byte[] bytearray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    req.ContentLength = bytearray.Length;
+                    req.Timeout = 999999;
+                    Stream datastream = req.GetRequestStream();
+                    datastream.Write(bytearray, 0, bytearray.Length);
+                    datastream.Close();
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.Dispatch.NonJobAppointmentResponse results = JsonConvert.DeserializeObject<Types.Dispatch.NonJobAppointmentResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Updates a non-job appointment file.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="njaid">The appointment ID to update</param>
+            ///             ''' <param name="payload">The data to update the appointment with.</param>
+            ///             ''' <returns>Either returns a NonJobAppointmentResponse, or a ServiceTitanError.</returns>
+            public static object updateNonJobAppointment(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, int njaid, Types.Dispatch.NonJobAppointmentUpdateRequest payload)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/dispatch/v2/tenant/" + tenant + "/non-job-appointments/" + njaid;
+
+                    // Dim counter As Integer = 0
+                    // If options IsNot Nothing Then
+                    // If options.Count > 0 Then
+                    // counter = 1
+                    // For Each item In options
+                    // If counter = 1 Then
+                    // baseurl &= "?" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // Else
+                    // baseurl &= "&" & System.Net.WebUtility.UrlEncode(item.key) & "=" & System.Net.WebUtility.UrlEncode(item.value)
+                    // End If
+                    // counter &= 1
+                    // Next
+                    // End If
+                    // End If
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "PUT";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    byte[] bytearray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
+                    req.ContentLength = bytearray.Length;
+                    req.Timeout = 999999;
+                    Stream datastream = req.GetRequestStream();
+                    datastream.Write(bytearray, 0, bytearray.Length);
+                    datastream.Close();
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Types.Dispatch.NonJobAppointmentResponse results = JsonConvert.DeserializeObject<Types.Dispatch.NonJobAppointmentResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+
+
+            // END OF UPDATE
+
             /// <summary>
             ///             ''' Returns a paginated list of appointment assignments. Does not get other pages, use pagination to cycle through them.
             ///             ''' </summary>
@@ -5197,6 +6629,83 @@ public class ServiceTitan
                 }
             }
         }
+        public class Forms : Types.Forms {
+            /// <summary>
+            ///             ''' Gets a full list of form submissions matching your specified filters.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="options">Your options, if you desire to filter the results (If applicable)</param>
+            ///             ''' <returns>Returns either a paginated list of forms (FormSubmissionResponse_P) or a ServiceTitanError class.</returns>
+            public static object getFormSubmissionList(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/forms/v2/tenant/" + tenant + "/submissions";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/x-www-form-urlencoded";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Console.WriteLine("Received: " + output);
+                    Types.Forms.FormSubmissionResponse_P results = JsonConvert.DeserializeObject<Types.Forms.FormSubmissionResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+        }
         public class Inventory : Types.Inventory
         {
             /// <summary>
@@ -5250,6 +6759,81 @@ public class ServiceTitan
 
                     Types.Inventory.CreatePurchaseOrderResponse deserialized = JsonConvert.DeserializeObject<Types.Inventory.CreatePurchaseOrderResponse>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
                     return deserialized;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Queries for a list of vendors, using a list of OptionsList as filters.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="options">A list of filters, as well as options to cycle through pages.</param>
+            ///             ''' <returns>A paginated list of vendors (as VendorResponse_P), or a ServiceTitanError.</returns>
+            public static object getVendorList(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/inventory/v2/tenant/" + tenant + "/vendors";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/json";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Console.WriteLine("API Output: " + output);
+                    Types.Inventory.VendorResponse_P results = JsonConvert.DeserializeObject<Types.Inventory.VendorResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
                 }
                 catch (WebException ex)
                 {
@@ -5320,6 +6904,81 @@ public class ServiceTitan
                     string output = streamread.ReadToEnd();
                     Console.WriteLine("API Output: " + output);
                     Types.Inventory.PurchaseOrderResponse_P results = JsonConvert.DeserializeObject<Types.Inventory.PurchaseOrderResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+
+                    streamread.Close();
+                    buffer.Close();
+                    response.Close();
+                    return results;
+                }
+                catch (WebException ex)
+                {
+                    ServiceTitanError newerror = ErrorHandling.ProcessError(ex);
+                    return newerror;
+                }
+            }
+            /// <summary>
+            ///             ''' Queries for a list of warehouses and trucks, using a list of OptionsList as filters.
+            ///             ''' </summary>
+            ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
+            ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
+            ///             ''' <param name="tenant">Your Tenant ID</param>
+            ///             ''' <param name="options">A list of filters, as well as options to cycle through pages.</param>
+            ///             ''' <returns>A paginated list of warehouses (as WarehouseReponse_P), or a ServiceTitanError.</returns>
+            public static object getWarehouses(oAuth2.AccessToken accesstoken, string STAppKey, int tenant, List<Internal.OptionsList> options = null)
+            {
+                try
+                {
+                    TimeSpan timespan = DateTime.Now - lastQuery;
+                    if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
+                        // Try to avoid getting hit by the rate limiter by sleeping it off
+                        System.Threading.Thread.Sleep((minMsSinceLastQuery - (int)timespan.TotalMilliseconds) + 100);
+
+                    string domain;
+                    if (useSandbox == true)
+                        domain = "https://" + sandboxEnvironment;
+                    else
+                        domain = "https://" + productionEnvironment;
+                    string baseurl = domain + "/inventory/v2/tenant/" + tenant + "/warehouses";
+
+                    int counter = 0;
+                    if (options != null)
+                    {
+                        if (options.Count > 0)
+                        {
+                            counter = 1;
+                            foreach (var item in options)
+                            {
+                                if (counter == 1)
+                                    baseurl += "?" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                else
+                                    baseurl += "&" + System.Net.WebUtility.UrlEncode(item.key) + "=" + System.Net.WebUtility.UrlEncode(item.value);
+                                counter += 1;
+                            }
+                        }
+                    }
+
+
+                    Console.WriteLine("Executing: " + baseurl);
+                    WebRequest req = WebRequest.Create(baseurl);
+                    req.Method = "GET";
+                    req.Timeout = 999999;
+                    req.Headers.Add("ST-App-Key", STAppKey);
+                    req.Headers.Add("Authorization", accesstoken.access_token);
+                    req.ContentType = "application/json";
+
+                    // Dim bytearray() As Byte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))
+                    // req.ContentLength = bytearray.Length
+                    // req.Timeout = 999999
+                    // Dim datastream As Stream = req.GetRequestStream
+                    // datastream.Write(bytearray, 0, bytearray.Length)
+                    // datastream.Close()
+
+                    WebResponse response = req.GetResponse();
+                    Stream buffer = response.GetResponseStream();
+                    StreamReader streamread = new StreamReader(buffer, System.Text.Encoding.UTF8);
+                    string output = streamread.ReadToEnd();
+                    Console.WriteLine("API Output: " + output);
+                    Types.Inventory.WarehouseResponse_P results = JsonConvert.DeserializeObject<Types.Inventory.WarehouseResponse_P>(output, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 
                     streamread.Close();
                     buffer.Close();
@@ -5454,7 +7113,7 @@ public class ServiceTitan
                     streamread.Close();
                     buffer.Close();
                     response.Close();
-                    return results;
+                    return null;
                 }
                 catch (WebException ex)
                 {
@@ -9929,7 +11588,7 @@ public class ServiceTitan
                     // End If
                     // End If
 
-
+                    Console.WriteLine("Payload: " + JsonConvert.SerializeObject(payload, new JsonSerializerSettings{NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented}));
                     Console.WriteLine("Executing: " + baseurl);
                     WebRequest req = WebRequest.Create(baseurl);
                     req.Method = "POST";
@@ -12884,7 +14543,7 @@ public class ServiceTitan
                 }
             }
             /// <summary>
-            ///             ''' Gets an estimate by it's ID.
+            ///             Gets an estimate by it's ID.
             ///             ''' </summary>
             ///             ''' <param name="estimateId">The estimate ID</param>
             ///             ''' <param name="accesstoken">The full oAuth2.AccessToken class containing your credentials.</param>
@@ -14131,7 +15790,14 @@ public class ServiceTitan
             }
         }
         public class Telecom : Types.Telecom
+        
         {
+            public static TimeSpan convertCallDurationToTimeSpan(string duration) {
+                var parts = duration.Split(":");
+                Console.WriteLine("Converting " + duration + " to timespan.");
+                TimeSpan value = new TimeSpan(System.Convert.ToInt32(parts[0]), System.Convert.ToInt32(parts[1]), System.Convert.ToInt32(Math.Round(System.Convert.ToDecimal(parts[2]))));
+                return value;
+            }
             /// <summary>
             ///             ''' Gets a list of call reasons
             ///             ''' </summary>
@@ -14433,7 +16099,7 @@ public class ServiceTitan
             ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
             ///             ''' <param name="tenant">Your Tenant ID</param>
             ///             ''' <returns>IF the file is not found, a webclient exception will be thrown. If successful, the file will be saved on disk.</returns>
-            public static object getCallRecording(int id, string saveLocation, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
+            public static void getCallRecording(int id, string saveLocation, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
             {
                 TimeSpan timespan = DateTime.Now - lastQuery;
                 if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
@@ -14468,8 +16134,6 @@ public class ServiceTitan
                 client.Headers.Add("ST-App-Key", STAppKey);
                 client.Headers.Add("Authorization", accesstoken.access_token);
                 client.DownloadFile(baseurl, saveLocation);
-                return null;
-
             }
             /// <summary>
             ///             ''' Gets a call voicemail, and saves it on disk. (mp3)
@@ -14480,7 +16144,7 @@ public class ServiceTitan
             ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
             ///             ''' <param name="tenant">Your Tenant ID</param>
             ///             ''' <returns>IF the file is not found, a webclient exception will be thrown. If successful, the file will be saved on disk.</returns>
-            public static object getCallVoicemail(int id, string saveLocation, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
+            public static void getCallVoicemail(int id, string saveLocation, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
             {
                 TimeSpan timespan = DateTime.Now - lastQuery;
                 if (lastQuery != DateTime.MinValue & timespan.TotalMilliseconds < minMsSinceLastQuery)
@@ -14515,7 +16179,6 @@ public class ServiceTitan
                 client.Headers.Add("ST-App-Key", STAppKey);
                 client.Headers.Add("Authorization", accesstoken.access_token);
                 client.DownloadFile(baseurl, saveLocation);
-                return null;
             }
             /// <summary>
             ///             ''' Updates a call record.
@@ -14526,7 +16189,7 @@ public class ServiceTitan
             ///             ''' <param name="STAppKey">Your ServiceTitan Application Key</param>
             ///             ''' <param name="tenant">Your Tenant ID</param>
             ///             ''' <returns>Returns either a DetailedCallModel, or a ServiceTitanError.</returns>
-            public static object updateCall(int id, Types.Telecom.CallInUpdateModel payload, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
+            public static object updateCall(int id, Types.Telecom.CallInUpdateModelV2 payload, oAuth2.AccessToken accesstoken, string STAppKey, int tenant)
             {
                 try
                 {
@@ -14560,7 +16223,7 @@ public class ServiceTitan
 
                     Console.WriteLine("Executing: " + baseurl);
                     WebRequest req = WebRequest.Create(baseurl);
-                    req.Method = "GET";
+                    req.Method = "PUT";
                     req.Timeout = 999999;
                     req.Headers.Add("ST-App-Key", STAppKey);
                     req.Headers.Add("Authorization", accesstoken.access_token);
@@ -14591,12 +16254,84 @@ public class ServiceTitan
                 }
             }
         }
+        public class Utility {
+                public static Types.Pricebook.MaterialUpdateRequest ConvertMaterialRequestToUpdateRequest(Types.Pricebook.MaterialResponse material) {
+                    var UpdatedMaterial = new Types.Pricebook.MaterialUpdateRequest();
+                    UpdatedMaterial.account = material.account;
+                    UpdatedMaterial.active = material.active;
+                    UpdatedMaterial.addOnMemberPrice = material.addOnMemberPrice;
+                    UpdatedMaterial.addOnPrice = material.addOnPrice;
+                    
+                    UpdatedMaterial.assetAccount = material.assetAccount;
+                    UpdatedMaterial.assets = material.assets;
+                    UpdatedMaterial.categories = material.categories;
+                    UpdatedMaterial.code = material.code;
+                    UpdatedMaterial.commissionBonus = material.commissionBonus;
+                    UpdatedMaterial.cost = material.cost;
+                    UpdatedMaterial.costOfSaleAccount = material.costOfSaleAccount;
+                    UpdatedMaterial.deductAsJobCost = material.deductAsJobCost;
+                    UpdatedMaterial.description = material.description;
+                    UpdatedMaterial.displayName = material.displayName;
+                    UpdatedMaterial.hours = material.hours;
+                    UpdatedMaterial.isInventory = material.isInventory;
+                    UpdatedMaterial.memberPrice = material.memberPrice;
+                    UpdatedMaterial.otherVendors = new List<Types.Pricebook.SkuVendorRequest>();
+                    if (material.otherVendors != null) {
+                        foreach(var items in material.otherVendors) {
+                            Types.Pricebook.SkuVendorSubAccountRequest subaccount = null;
+
+                            if (items.primarySubAccount != null) {
+                                subaccount = new Types.Pricebook.SkuVendorSubAccountRequest();
+                                subaccount.accountName = items.primarySubAccount.accountName;
+                                subaccount.cost = items.primarySubAccount.cost;
+                            }
+                            List<Types.Pricebook.SkuVendorSubAccountRequest> otherSubAccounts = null;
+                            if (items.otherSubAccounts != null) {
+                                otherSubAccounts = new List<Types.Pricebook.SkuVendorSubAccountRequest>();
+                                foreach (var accounts in items.otherSubAccounts) {
+                                    otherSubAccounts.Add(new Types.Pricebook.SkuVendorSubAccountRequest {accountName = accounts.accountName, cost = accounts.cost});
+                                }
+                            }
+                            
+                            UpdatedMaterial.otherVendors.Add(new Types.Pricebook.SkuVendorRequest{vendorId = items.vendorId, memo = items.memo, vendorPart = items.vendorPart, cost = items.cost, active = items.active, primarySubAccount = subaccount,  otherSubAccounts = otherSubAccounts});
+                        }
+                    }
+                    UpdatedMaterial.paysCommission = material.paysCommission;
+                    UpdatedMaterial.price = material.price;
+                    if (material.primaryVendor != null) {
+                        UpdatedMaterial.primaryVendor = new Types.Pricebook.SkuVendorRequest();
+                        UpdatedMaterial.primaryVendor.active = material.primaryVendor.active;
+                        UpdatedMaterial.primaryVendor.cost = material.primaryVendor.cost;
+                        UpdatedMaterial.primaryVendor.memo = material.primaryVendor.memo;
+                        Types.Pricebook.SkuVendorSubAccountRequest subaccount = null;
+                        if (material.primaryVendor.primarySubAccount != null) {
+                            subaccount = new Types.Pricebook.SkuVendorSubAccountRequest();
+                            subaccount.accountName = material.primaryVendor.primarySubAccount.accountName;
+                            subaccount.cost = material.primaryVendor.primarySubAccount.cost;
+                        }
+                        List<Types.Pricebook.SkuVendorSubAccountRequest> otherSubAccounts = null;
+                        if (material.primaryVendor.otherSubAccounts != null) {
+                            otherSubAccounts= new List<Types.Pricebook.SkuVendorSubAccountRequest>();
+                            foreach (var accounts in material.primaryVendor.otherSubAccounts) {
+                                otherSubAccounts.Add(new Types.Pricebook.SkuVendorSubAccountRequest {accountName = accounts.accountName, cost = accounts.cost});
+                            }
+                        }
+                        UpdatedMaterial.primaryVendor.otherSubAccounts = otherSubAccounts;
+                        UpdatedMaterial.primaryVendor.primarySubAccount = subaccount;
+                        UpdatedMaterial.primaryVendor.vendorId = material.primaryVendor.vendorId;
+                        UpdatedMaterial.primaryVendor.vendorPart = material.primaryVendor.vendorPart;
+                    }
+                    UpdatedMaterial.taxable = material.taxable;
+                    UpdatedMaterial.unitOfMeasure = material.unitOfMeasure;
+                    return UpdatedMaterial;
+                }
+            }
     }
     public class Internal
     {
         /// <summary>
-        ///         ''' OptionsList: Used to enumerate HTTP arguments, mainly used when GETting data from the API as a way to filter the data returned.
-        ///         ''' </summary>
+        ///         OptionsList: Used to enumerate HTTP arguments, mainly used when GETting data from the API as a way to filter the data returned.
+        ///         </summary>
         public class OptionsList
         {
             public string key;
@@ -14631,8 +16366,11 @@ public class ServiceTitan
         public static ServiceTitanError ProcessError(WebException exception)
         {
             Console.WriteLine("STAPIv2: -----An Error Has Occured-----");
-            var weberror = exception.Response as System.Net.HttpWebResponse;
-            Console.WriteLine("HTTP Request Code: " + weberror.StatusCode + " (" + weberror.StatusDescription + ")");
+            var resp = exception.Response;
+            
+
+            
+            Console.WriteLine("HTTP Request Code: " + (int)exception.Status);
             Stream str = exception.Response.GetResponseStream();
             StreamReader output = new StreamReader(str);
             string outputstr = output.ReadToEnd();
@@ -14645,4 +16383,6 @@ public class ServiceTitan
             return newerror;
         }
     }
+}  
 }
+
